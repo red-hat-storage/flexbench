@@ -95,11 +95,11 @@ if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper spe
   #make mapper script
   mapper_script="$basedir/mapper.sh"
   cat << EOF > "$mapper_script"
-java -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $synthjson -template $template -count $records_per_mapper
+java -Xmx1028m -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $synthjson -template $template -count $records_per_mapper
 EOF
   log "Using mapper script:" $(cat "$mapper_script")
 
-  command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=4096 -input "$dfs_input" -output "$output" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper mapper.sh -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
+  command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=1536 -input "$dfs_input" -output "$output" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper mapper.sh -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
 
   # add required files for execution
   for file in "$log4j" "$template" "$synthjson" "$mapper_script" "$logsynthjar"; do
