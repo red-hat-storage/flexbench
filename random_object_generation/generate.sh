@@ -77,6 +77,11 @@ if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper spe
   [ ! -f "$HADOOP_HOME"/hadoop-streaming*.jar ] && log 'Unable to find Hadoop streaming jar at $HADOOP_HOME/hadoop-streaming*.jar' && exit 1
 
   hadoop_cmd="$HADOOP_HOME/bin/hadoop"
+  log hadoop_cmd="$hadoop_cmd"
+
+  streaming_jar=$("$hadoop_cmd" classpath --glob | sed -e "s/:/\n/g" | grep hadoop-streaming | head -n1 | xargs echo -n)
+  [ -z "$streaming_jar" ] && log 'Unable to find hadoop-streaming jar in hadoop classpath' && exit 1
+  log streaming_jar="$streaming_jar"
 
   #make fake input file
   inputfile=fake_input.$RANDOM
@@ -95,7 +100,7 @@ java -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $synthjson -tem
 EOF
   log "Using mapper script:" $(cat "$mapper_script")
 
-  command=("$hadoop_cmd" jar "$HADOOP_HOME"/hadoop-streaming*.jar -input "$dfs_input" -output "$output" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
+  command=("$hadoop_cmd" jar "$streaming_jar" -input "$dfs_input" -output "$output" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
 
   # add required files for execution
   for file in "$log4j" "$template" "$synthjson" "$mapper_script" "$logsynthjar"; do
