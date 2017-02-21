@@ -74,7 +74,6 @@ log output="$output"
 if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper specified.
   [ -z "$output" ] && log 'Output directory is required for mapreduce mode' && usage
   [ -z "$HADOOP_HOME" ] && log '$HADOOP_HOME must be set to run with map reduce' && exit 1
-  [ ! -f "$HADOOP_HOME"/hadoop-streaming*.jar ] && log 'Unable to find Hadoop streaming jar at $HADOOP_HOME/hadoop-streaming*.jar' && exit 1
 
   hadoop_cmd="$HADOOP_HOME/bin/hadoop"
   log hadoop_cmd="$hadoop_cmd"
