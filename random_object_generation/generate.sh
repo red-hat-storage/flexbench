@@ -12,6 +12,8 @@ template=apache_log.template
 mappers=0
 records_per_mapper=1M
 log4j=log4j.properties
+startdate=2017-02-21
+days=1
 
 usage()
 {
@@ -21,6 +23,8 @@ usage()
   log "  -m|--mappers Number of mappers to use for parallel data generation, if 0 it is run localy with output to local fs."
   log "  -c|--count Number of records generated per mapper. Allowed suffexes k, M, and G."
   log "  -o|--output Output path, optional for local mode."
+  log "  -sd|--startdate Starting date in ISO format"
+  log "  -d|--days number of days to generate for (each is a seperate mr job)"
   exit 1
 }
 
@@ -54,6 +58,15 @@ case $i in
     -o=*|--output=*)
     output="${i#*=}"
     ;;
+    -sd=*|--startdate=*)
+    startdate=$(date -I -d "${i#*=}" | xargs echo -n) || { log 'Invalid start date' && usage; }
+    ;;
+    -d=*|--days=*)
+    days="${i#*=}"
+    if [[ ! $days =~ ^[1-9][0-9]*$ ]]; then
+      log "Number of days must be a number" && usage
+    fi
+    ;;
     *)
     log "Invalid argument $i" && usage
     ;;
@@ -70,6 +83,8 @@ log template="$template"
 log mappers="$mappers"
 log records_per_mapper="$records_per_mapper"
 log output="$output"
+log startdate="$startdate"
+log days="$days"
 
 if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper specified.
   [ -z "$output" ] && log 'Output directory is required for mapreduce mode' && usage
@@ -83,7 +98,7 @@ if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper spe
   log streaming_jar="$streaming_jar"
 
   #make fake input file
-  inputfile=fake_input.$RANDOM
+  inputfile=fake_input.$mappers
   local_input="$basedir/$inputfile"
   dfs_input="/user/$USER/$inputfile"
   : > "$local_input"
@@ -92,21 +107,36 @@ if [ "$mappers" -gt 0 ]; then #Only do map-reduce if greater than one mapper spe
   done
   "$hadoop_cmd" fs -put "$local_input" "$dfs_input" && rm "$local_input"
 
-  #make mapper script
-  mapper_script="$basedir/mapper.sh"
-  cat << EOF > "$mapper_script"
-java -Xmx1028m -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $synthjson -template $template -count $records_per_mapper
+  date=$startdate
+  for i in $(seq 1 $days); do
+    log "---"
+    log "Building job for date $date"
+    #make synth json file for date
+    datesynthjson="tmp-$date-$synthjson"
+    cat "$synthjson" | sed -e "s/DATE/$date/g" > "$datesynthjson"
+
+    #make mapper script
+    mapper_script="$basedir/tmp-$date-mapper.sh"
+    cat << EOF > "$mapper_script"
+java -Xmx1028m -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $datesynthjson -template $template -count $records_per_mapper
 EOF
-  log "Using mapper script:" $(cat "$mapper_script")
+    log "Using mapper script:" $(cat "$mapper_script")
 
-  command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=1536 -input "$dfs_input" -output "$output" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper mapper.sh -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
+    command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=1536 -input "$dfs_input" -output "$output/ds=$date" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper mapper.sh -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
 
-  # add required files for execution
-  for file in "$log4j" "$template" "$synthjson" "$mapper_script" "$logsynthjar"; do
-    command+=(-file "$file")
+    # add required files for execution
+    for file in "$log4j" "$template" "$datesynthjson" "$mapper_script" "$logsynthjar"; do
+      command+=(-file "$file")
+    done
+
+    logfile="log-$date.txt"
+
+    log "Running command:" "${command[@]}"
+    log "Output will be logged to $logfile"
+    "${command[@]}" &> "$logfile" &
+
+    date=$(date -I -d "$date + 1 day" | xargs echo -n)
   done
-  log "Running command:" "${command[@]}"
-  "${command[@]}"
 
 else
   command=(java -Dlog4j.configuration=file:"$log4j" -jar "$logsynthjar" -schema "$synthjson" -template "$template" -count "$records_per_mapper")
