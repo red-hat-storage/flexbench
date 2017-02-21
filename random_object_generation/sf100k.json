@@ -1,0 +1,11 @@
+[
+   {"name":"item", "class":"foreign-key", "size":502000, "skew":1},
+   {"name":"cust", "class":"int", "min":1, "max":100000000, "skew":1},
+   {"name":"os", "class":"os"},
+   {"name":"br", "class":"browser"},
+   {"name":"ip1", "class":"int", "min":1, "max":254},
+   {"name":"ip2", "class":"int", "min":1, "max":254},
+   {"name":"ip3", "class":"int", "min":1, "max":254},
+   {"name":"ip4", "class":"int", "min":1, "max":254},
+   {"name":"ts", "class":"date", "format": "MM/dd/yyyy HH:mm:ss", "start": "02/01/2014 00:00:00", "end": "02/01/2017 00:00:00"}
+]
