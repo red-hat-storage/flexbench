@@ -39,8 +39,12 @@ my $db = {
 print "filename,status,time,rows\n";
 for my $query ( @queries ) {
 	my $logname = "$query.log";
+        #hive 
 	#my $cmd="echo 'use $db->{${suite}}; source $query;' | hive -i testbench.settings 2>&1  | tee ${format}_${scale}_${query}.log";
-	my $cmd="echo 'use $db->{${suite}}; source $query;' | hive -i testbench_hive-spark.settings 2>&1  | tee ${format}_${scale}_${query}.log";
+        #hive-spark
+	#my $cmd="echo 'use $db->{${suite}}; source $query;' | hive -i testbench_hive-spark.settings 2>&1  | tee ${format}_${scale}_${query}.log";
+        #spark
+	my $cmd="/data1/spark-2.1.0-bin-hadoop2.7/bin/spark-sql --master=yarn --database $db->{${suite}} -f $query -i testbench_spark.settings 2>&1 1>${format}_${scale}_${query}.out | tee ${format}_${scale}_${query}.log";
 	#my $cmd="$PRESTO_EXECUTABLE --server $PRESTO_SERVER --catalog hive --schema $db->{${suite}} --file $query 2>&1 1>${format}_${scale}_${query}.out | tee ${format}_${scale}_${query}.log";
 #	my $cmd="cat ${format}_${scale}_${query}.log";
 	#print $cmd ; exit;
@@ -54,7 +58,8 @@ for my $query ( @queries ) {
 	my $hiveTime = $hiveEnd - $hiveStart;
         if ($engine eq 'hive') {
 	        foreach my $line ( @hiveoutput ) {
-		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:\s+(\d+)\s+row/ ) {
+		        #if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:\s+(\d+)\s+row/ ) {
+		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched\s+(\d+)\s+row/ ) {
 			        print "$query,success,$hiveTime,$2\n"; 
 		        } elsif( 
 			        $line =~ /^FAILED: /
