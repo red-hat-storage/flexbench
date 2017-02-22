@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use File::Basename;
+use POSIX qw/strftime/;
 
 # PROTOTYPES
 sub dieWithUsage(;$);
@@ -28,8 +29,7 @@ chdir $query_dir;
 my @queries = glob '*.sql';
 
 my $db = "tpcds_bin_partitioned_${format}_$scale",
-
-print "filename,status,time,rows\n";
+print "filename,status,start,end,tot_time,query_time,rows\n";
 for my $query ( @queries ) {
 	my $logname = "${engine}_${format}_${scale}_${query}";
 
@@ -41,30 +41,32 @@ for my $query ( @queries ) {
         };
 
 	my $hiveStart = time();
+        my $hiveStartFmt = strftime('%Y-%m-%d %H:%M:%S',localtime($hiveStart));
 
 	my @hiveoutput=`$cmd->{${engine}}`;
 	die "${SCRIPT_NAME}:: ERROR:  command unexpectedly exited \$? = '$?', \$! = '$!'" if $?;
 
 	my $hiveEnd = time();
+        my $hiveEndFmt = strftime('%Y-%m-%d %H:%M:%S',localtime($hiveEnd));
 	my $hiveTime = $hiveEnd - $hiveStart;
         if ($engine eq 'hive' or $engine eq "hive-spark" or $engine eq "spark") {
                 my $output = '';
 	        foreach my $line ( @hiveoutput ) {
 		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:*\s+(\d+)\s+row/ ) {
-			        $output = "$logname,success,$hiveTime,$2\n"; 
+			        $output = "$logname,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$1,$2\n"; 
 		        } # end if
 	        } # end while
 	        if ( $output eq '' ) {
-		        $output = "$logname,failed,$hiveTime\n"; 
+		        $output = "$logname,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n"; 
                 }
 	        print $output;
         } else {
                 my $rows = `wc -l $logname.out`;
                 my @row = split(/\s/, $rows);
                 if (not(@hiveoutput)) {
-                        print "$logname,success,$hiveTime,$row[0]\n";
+                        print "$logname,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$hiveTime,$row[0]\n";
                 } else {
-                        print "$logname,failed,$hiveTime\n";
+                        print "$logname,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n";
                 }
         }
 } # end for
