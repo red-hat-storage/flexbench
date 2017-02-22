@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd hive-testbench
-
 #generate 1TB tables for orc and parquet
 ./tpcds-setup.sh 1000 orc /tmp/orc_1000
 ./tpcds-setup.sh 1000 parquet /tmp/parquet_1000
