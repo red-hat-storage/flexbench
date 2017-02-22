@@ -15,8 +15,9 @@ my $PRESTO_SERVER = "ip-172-31-22-200.us-west-2.compute.internal:8500";
 my $PRESTO_EXECUTABLE = "/home/ubuntu/presto-cli/presto-cli-0.152-executable.jar";
 
 # MAIN
-dieWithUsage("one or more parameters not defined") unless @ARGV >= 3;
+dieWithUsage("one or more parameters not defined") unless @ARGV >= 4;
 my $query_dir = shift;
+my $run_id = shift;
 my $engine = shift;
 my $format = shift;
 my $scale = shift || 2;
@@ -31,7 +32,7 @@ my @queries = glob '*.sql';
 my $db = "tpcds_bin_partitioned_${format}_$scale",
 print "filename,status,start,end,tot_time,query_time,rows\n";
 for my $query ( @queries ) {
-	my $logname = "${engine}_${format}_${scale}_${query}";
+	my $logname = "${engine}_${format}_${scale}_${query}_${run_id}";
 
         my $cmd = {
                 'hive' => "echo 'use $db; source $query;' | hive -i ../testbench.settings 2>&1  | tee $logname.log",
