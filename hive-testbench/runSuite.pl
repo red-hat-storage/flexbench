@@ -52,10 +52,7 @@ for my $query ( @queries ) {
 	        foreach my $line ( @hiveoutput ) {
 		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:*\s+(\d+)\s+row/ ) {
 			        $output = "$logname,success,$hiveTime,$2\n"; 
-		        } elsif( 
-			        $line =~ /^FAILED: /
-			        # || /Task failed!/ 
-			        ) {
+		        } else {
 			        $output = "$logname,failed,$hiveTime\n"; 
 		        } # end if
 	        } # end while
