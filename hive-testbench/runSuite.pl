@@ -52,10 +52,11 @@ for my $query ( @queries ) {
 	        foreach my $line ( @hiveoutput ) {
 		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:*\s+(\d+)\s+row/ ) {
 			        $output = "$logname,success,$hiveTime,$2\n"; 
-		        } else {
-			        $output = "$logname,failed,$hiveTime\n"; 
 		        } # end if
 	        } # end while
+	        if ( $output eq '' ) {
+		        $output = "$logname,failed,$hiveTime\n"; 
+                }
 	        print $output;
         } else {
                 my $rows = `wc -l $logname.out`;
