@@ -121,7 +121,7 @@ java -Xmx1028m -Dlog4j.configuration=file:$log4j -jar $logsynthjar -schema $date
 EOF
   log "Using mapper script:" $(cat "$mapper_script")
 
-  command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=1536 -input "$dfs_input" -output "$output/ds=$date" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper mapper.sh -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
+  command=("$hadoop_cmd" jar "$streaming_jar" -D mapreduce.map.memory.mb=1536 -input "$dfs_input" -output "$output/ds=$date" -inputformat org.apache.hadoop.mapred.lib.NLineInputFormat -mapper $(basename "$mapper_script") -reducer org.apache.hadoop.mapred.lib.IdentityReducer -numReduceTasks 0)
 
   # add required files for execution
   for file in "$log4j" "$template" "$datesynthjson" "$mapper_script" "$logsynthjar"; do
