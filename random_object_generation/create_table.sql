@@ -4,11 +4,11 @@
 --Note regex is a Java escaped string hence the extra \\\
 
 -- example usage in shell:
--- set hivevar:table=part_log_test3;
+-- set hivevar:table=default.part_log_test3;
 -- set hivevar:location=/user/andrew/part_log_test3;
 
 -- example usage at cli:
--- hive -f create_table.sql --hivevar table=part_log_test3 --hivevar location=/user/andrew/part_log_test3 --database default
+-- hive -f create_table.sql --hivevar table=default.part_log_test3 --hivevar location=/user/andrew/part_log_test3
 
 DROP TABLE IF EXISTS ${table};
 
