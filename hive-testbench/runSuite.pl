@@ -30,8 +30,7 @@ chdir $query_dir;
 #my @queries = glob '*.sql';
 my @queries = split(/\s/, `cat run_order_${run_id}.txt`);
 
-my $db = "tpcds_bin_partitioned_${format}_$scale",
-print "filename,status,start,end,tot_time,query_time,rows\n";
+my $db = "tpcds_bin_partitioned_${format}_$scale";
 for my $query ( @queries ) {
 	my $logname = "${engine}_${format}_${scale}_${query}_${run_id}";
 

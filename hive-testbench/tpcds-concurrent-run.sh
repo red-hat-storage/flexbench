@@ -3,6 +3,7 @@
 QUERY_DIR=$1
 CONCURRENCY=$2
 
+echo "filename,status,start,end,tot_time,query_time,rows"
 
 for scale in 1000 10000 100000 
 do

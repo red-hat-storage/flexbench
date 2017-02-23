@@ -2,6 +2,8 @@
 
 QUERY_DIR=$1
 
+echo "filename,status,start,end,tot_time,query_time,rows"
+
 #run 1TB queries
 perl runSuite.pl $QUERY_DIR 1 presto orc 1000
 perl runSuite.pl $QUERY_DIR 1 spark parquet 1000
