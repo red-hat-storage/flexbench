@@ -3,7 +3,10 @@
 QUERY_DIR=$1
 CONCURRENCY=$2
 
-echo "query_set,run_id,engine,format,scale_factor,query,status,start,end,tot_time,query_time,rows" > $1/tpc_stats_$2.log
+for x in `seq 1 $CONCURRENCY`
+do
+   echo "query_set,run_id,engine,format,scale_factor,query,status,start,end,tot_time,query_time,rows" > $1/tpc_stats_$x.log
+done
 
 for scale in 2 3 4 
 do
