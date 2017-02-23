@@ -1,0 +1,9 @@
+spark.executor.memory	2048m
+spark.executor.instances	12
+spark.driver.memory	2048m
+spark.eventLog.enabled	false
+spark.serializer	org.apache.spark.serializer.KryoSerializer
+spark.kryo.classesToRegister	org.apache.hadoop.hive.ql.io.HiveKey,org.apache.hadoop.io.BytesWritable,org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch
+spark.driver.extraJavaOptions	-Xss8m
+spark.executor.extraJavaOptions	-Xss8m
+21.0	1476.705	1335.4912500000003	10683.930000000002

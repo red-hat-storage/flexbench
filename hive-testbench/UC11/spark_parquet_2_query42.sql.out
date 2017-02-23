@@ -1,0 +1,18 @@
+spark.executor.memory	2048m
+spark.executor.instances	12
+spark.driver.memory	2048m
+spark.eventLog.enabled	false
+spark.serializer	org.apache.spark.serializer.KryoSerializer
+spark.kryo.classesToRegister	org.apache.hadoop.hive.ql.io.HiveKey,org.apache.hadoop.io.BytesWritable,org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch
+spark.driver.extraJavaOptions	-Xss8m
+spark.executor.extraJavaOptions	-Xss8m
+1998	1	Women	862306.1300000001
+1998	6	Jewelry	862076.3300000001
+1998	7	Home	726102.5999999999
+1998	10	Electronics	704992.9600000001
+1998	2	Men	640134.56
+1998	5	Music	623784.19
+1998	3	Children	571542.87
+1998	4	Shoes	533659.98
+1998	9	Books	467550.24
+1998	8	Sports	417644.69000000006

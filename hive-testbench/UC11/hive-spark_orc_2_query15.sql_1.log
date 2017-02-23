@@ -1,0 +1,16 @@
+
+Logging initialized using configuration in jar:file:/opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-common-1.1.0-cdh5.8.2.jar!/hive-log4j.properties
+WARNING: Hive CLI is deprecated and migration to Beeline is recommended.
+hive> use tpcds_bin_partitioned_orc_2; source query15.sql;
+OK
+Time taken: 0.327 seconds
+Query ID = ubuntu_20170222214545_9498e99a-6fc6-42e7-8fb8-1745ce1c5e49
+Total jobs = 3
+Launching Job 1 out of 3
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Starting Spark Job = a0dcb05e-59a8-43e8-8bc2-d50be00b7917

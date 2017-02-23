@@ -1,0 +1,712 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 33554432 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2745), pid=11285, tid=139845155407616
+#
+# JRE version: Java(TM) SE Runtime Environment (7.0_67-b01) (build 1.7.0_67-b01)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (24.65-b04 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f304007d800):  VMThread [stack: 0x00007f303cbfc000,0x00007f303ccfd000] [id=14118]
+
+Stack: [0x00007f303cbfc000,0x00007f303ccfd000],  sp=0x00007f303ccfafc0,  free space=1019k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x99eb8a]  VMError::report_and_die()+0x2ea
+V  [libjvm.so+0x49721b]  report_vm_out_of_memory(char const*, int, unsigned long, char const*)+0x9b
+V  [libjvm.so+0x81d9ae]  os::Linux::commit_memory_impl(char*, unsigned long, bool)+0xfe
+V  [libjvm.so+0x81def9]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0x29
+V  [libjvm.so+0x817caa]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2a
+V  [libjvm.so+0x88a7a3]  PSVirtualSpace::expand_by(unsigned long)+0x53
+V  [libjvm.so+0x88bb78]  PSYoungGen::resize_generation(unsigned long, unsigned long)+0xf8
+V  [libjvm.so+0x88ace2]  PSYoungGen::resize(unsigned long, unsigned long)+0x22
+V  [libjvm.so+0x888133]  PSScavenge::invoke_no_policy()+0xfb3
+V  [libjvm.so+0x8888e1]  PSScavenge::invoke()+0x41
+V  [libjvm.so+0x83f510]  ParallelScavengeHeap::failed_mem_allocate(unsigned long)+0x70
+V  [libjvm.so+0x9a0417]  VM_ParallelGCFailedAllocation::doit()+0x97
+V  [libjvm.so+0x9a78b5]  VM_Operation::evaluate()+0x55
+V  [libjvm.so+0x9a5c7a]  VMThread::evaluate_operation(VM_Operation*)+0xba
+V  [libjvm.so+0x9a5ffe]  VMThread::loop()+0x1ce
+V  [libjvm.so+0x9a6470]  VMThread::run()+0x70
+V  [libjvm.so+0x81f988]  java_start(Thread*)+0x108
+
+VM_Operation (0x00007f30487c4850): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007f3040022800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f30408a9800 JavaThread "process reaper" daemon [_thread_blocked, id=14336, stack(0x00007f3036953000,0x00007f303698c000)]
+  0x00007f30400b2800 JavaThread "Service Thread" daemon [_thread_blocked, id=14210, stack(0x00007f303c46d000,0x00007f303c56e000)]
+  0x00007f30400b0000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=14207, stack(0x00007f303c56e000,0x00007f303c66f000)]
+  0x00007f30400ad000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=14205, stack(0x00007f303c66f000,0x00007f303c770000)]
+  0x00007f30400a5000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=14201, stack(0x00007f303c770000,0x00007f303c871000)]
+  0x00007f3040084000 JavaThread "Finalizer" daemon [_thread_blocked, id=14123, stack(0x00007f303c9fa000,0x00007f303cafb000)]
+  0x00007f3040082000 JavaThread "Reference Handler" daemon [_thread_blocked, id=14122, stack(0x00007f303cafb000,0x00007f303cbfc000)]
+  0x00007f3040022800 JavaThread "main" [_thread_blocked, id=14105, stack(0x00007f30486c6000,0x00007f30487c7000)]
+
+Other Threads:
+=>0x00007f304007d800 VMThread [stack: 0x00007f303cbfc000,0x00007f303ccfd000] [id=14118]
+  0x00007f30400b5000 WatcherThread [stack: 0x00007f303c36c000,0x00007f303c46d000] [id=14212]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f304001e950] Threads_lock - owner thread: 0x00007f304007d800
+[0x00007f304001ee50] Heap_lock - owner thread: 0x00007f3040022800
+
+Heap
+ PSYoungGen      total 37888K, used 4886K [0x00000007d5500000, 0x00000007d7f00000, 0x0000000800000000)
+  eden space 32768K, 0% used [0x00000007d5500000,0x00000007d5500000,0x00000007d7500000)
+  from space 5120K, 95% used [0x00000007d7a00000,0x00000007d7ec5bf8,0x00000007d7f00000)
+  to   space 5120K, 0% used [0x00000007d7500000,0x00000007d7500000,0x00000007d7a00000)
+ ParOldGen       total 84992K, used 8K [0x0000000780000000, 0x0000000785300000, 0x00000007d5500000)
+  object space 84992K, 0% used [0x0000000780000000,0x0000000780002000,0x0000000785300000)
+ PSPermGen       total 21504K, used 9462K [0x0000000760000000, 0x0000000761500000, 0x0000000780000000)
+  object space 21504K, 44% used [0x0000000760000000,0x000000076093d9a8,0x0000000761500000)
+
+Card table byte_map: [0x00007f30454a2000,0x00007f30459a3000] byte_map_base: 0x00007f30419a2000
+
+Polling page: 0x00007f30487d1000
+
+Code Cache  [0x00007f303d000000, 0x00007f303d270000, 0x00007f3040000000)
+ total_blobs=442 nmethods=174 adapters=221 free_code_cache=48275Kb largest_free_block=49361984
+
+Compilation events (10 events):
+Event: 47.656 Thread 0x00007f30400b0000 nmethod 171 0x00007f303d0c8d10 code [0x00007f303d0c8f40, 0x00007f303d0c9488]
+Event: 47.656 Thread 0x00007f30400b0000  172             sun.nio.cs.UTF_8$Encoder::encodeLoop (28 bytes)
+Event: 47.724 Thread 0x00007f30400b0000 nmethod 172 0x00007f303d0cc210 code [0x00007f303d0cc380, 0x00007f303d0cc4b8]
+Event: 47.724 Thread 0x00007f30400b0000  173             sun.nio.cs.StreamEncoder::implWrite (156 bytes)
+Event: 47.809 Thread 0x00007f30400b0000 nmethod 173 0x00007f303d0ce990 code [0x00007f303d0ceb20, 0x00007f303d0cee40]
+Event: 47.809 Thread 0x00007f30400b0000  174   !         sun.nio.cs.StreamEncoder::write (78 bytes)
+Event: 48.661 Thread 0x00007f30400b0000 nmethod 174 0x00007f303d0cd9d0 code [0x00007f303d0cdb80, 0x00007f303d0ce3e0]
+Event: 48.697 Thread 0x00007f30400b0000  175             sun.nio.cs.StreamEncoder::ensureOpen (18 bytes)
+Event: 52.441 Thread 0x00007f30400ad000 nmethod 120 0x00007f303d0dd310 code [0x00007f303d0de020, 0x00007f303d0e6de8]
+Event: 52.460 Thread 0x00007f30400ad000  176             org.apache.xerces.dom.DocumentImpl::setMutationEvents (6 bytes)
+
+GC Heap History (3 events):
+Event: 37.718 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 37888K, used 32768K [0x00000007d5500000, 0x00000007d7f00000, 0x0000000800000000)
+  eden space 32768K, 100% used [0x00000007d5500000,0x00000007d7500000,0x00000007d7500000)
+  from space 5120K, 0% used [0x00000007d7a00000,0x00000007d7a00000,0x00000007d7f00000)
+  to   space 5120K, 0% used [0x00000007d7500000,0x00000007d7500000,0x00000007d7a00000)
+ ParOldGen       total 84992K, used 0K [0x0000000780000000, 0x0000000785300000, 0x00000007d5500000)
+  object space 84992K, 0% used [0x0000000780000000,0x0000000780000000,0x0000000785300000)
+ PSPermGen       total 21504K, used 7397K [0x0000000760000000, 0x0000000761500000, 0x0000000780000000)
+  object space 21504K, 34% used [0x0000000760000000,0x00000007607397c8,0x0000000761500000)
+Event: 37.741 GC heap after
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 37888K, used 4782K [0x00000007d5500000, 0x00000007d7f00000, 0x0000000800000000)
+  eden space 32768K, 0% used [0x00000007d5500000,0x00000007d5500000,0x00000007d7500000)
+  from space 5120K, 93% used [0x00000007d7500000,0x00000007d79aba58,0x00000007d7a00000)
+  to   space 5120K, 0% used [0x00000007d7a00000,0x00000007d7a00000,0x00000007d7f00000)
+ ParOldGen       total 84992K, used 8K [0x0000000780000000, 0x0000000785300000, 0x00000007d5500000)
+  object space 84992K, 0% used [0x0000000780000000,0x0000000780002000,0x0000000785300000)
+ PSPermGen       total 21504K, used 7397K [0x0000000760000000, 0x0000000761500000, 0x0000000780000000)
+  object space 21504K, 34% used [0x0000000760000000,0x00000007607397c8,0x0000000761500000)
+}
+Event: 52.539 GC heap before
+{Heap before GC invocations=2 (full 0):
+ PSYoungGen      total 37888K, used 37550K [0x00000007d5500000, 0x00000007d7f00000, 0x0000000800000000)
+  eden space 32768K, 100% used [0x00000007d5500000,0x00000007d7500000,0x00000007d7500000)
+  from space 5120K, 93% used [0x00000007d7500000,0x00000007d79aba58,0x00000007d7a00000)
+  to   space 5120K, 0% used [0x00000007d7a00000,0x00000007d7a00000,0x00000007d7f00000)
+ ParOldGen       total 84992K, used 8K [0x0000000780000000, 0x0000000785300000, 0x00000007d5500000)
+  object space 84992K, 0% used [0x0000000780000000,0x0000000780002000,0x0000000785300000)
+ PSPermGen       total 21504K, used 9462K [0x0000000760000000, 0x0000000761500000, 0x0000000780000000)
+  object space 21504K, 44% used [0x0000000760000000,0x000000076093d9a8,0x0000000761500000)
+
+Deoptimization events (8 events):
+Event: 31.575 Thread 0x00007f3040022800 Uncommon trap: reason=unreached action=reinterpret pc=0x00007f303d073ef8 method=java.util.zip.ZipCoder.encoder()Ljava/nio/charset/CharsetEncoder; @ 4
+Event: 32.986 Thread 0x00007f3040022800 Uncommon trap: reason=unreached action=reinterpret pc=0x00007f303d0735d4 method=sun.misc.URLClassPath$JarLoader.ensureOpen()V @ 4
+Event: 32.987 Thread 0x00007f3040022800 Uncommon trap: reason=unreached action=reinterpret pc=0x00007f303d07385c method=java.util.zip.ZipCoder.encoder()Ljava/nio/charset/CharsetEncoder; @ 4
+Event: 34.398 Thread 0x00007f3040022800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f303d0621c4 method=java.util.Properties$LineReader.readLine()I @ 62
+Event: 34.404 Thread 0x00007f3040022800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f303d0621c4 method=java.util.Properties$LineReader.readLine()I @ 62
+Event: 34.404 Thread 0x00007f3040022800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f303d0621c4 method=java.util.Properties$LineReader.readLine()I @ 62
+Event: 44.816 Thread 0x00007f3040022800 Uncommon trap: reason=unreached action=reinterpret pc=0x00007f303d0776a4 method=sun.misc.URLClassPath$JarLoader.ensureOpen()V @ 4
+Event: 45.289 Thread 0x00007f3040022800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f303d0621c4 method=java.util.Properties$LineReader.readLine()I @ 62
+
+Internal exceptions (10 events):
+Event: 40.159 Thread 0x00007f3040022800 Threw 0x00000007d5e6bd78 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 40.160 Thread 0x00007f3040022800 Threw 0x00000007d5e77cf0 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 44.816 Thread 0x00007f3040022800 Implicit null exception at 0x00007f303d076f55 to 0x00007f303d077689
+Event: 45.278 Thread 0x00007f3040022800 Threw 0x00000007d6914ce8 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 45.286 Thread 0x00007f3040022800 Threw 0x00000007d69327a8 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 45.289 Thread 0x00007f3040022800 Threw 0x00000007d6937fe0 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 45.292 Thread 0x00007f3040022800 Threw 0x00000007d6956da8 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 45.293 Thread 0x00007f3040022800 Threw 0x00000007d6978920 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 45.306 Thread 0x00007f3040022800 Threw 0x00000007d6999200 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+Event: 47.726 Thread 0x00007f3040022800 Threw 0x00000007d6f78ac8 at /HUDSON/workspace/7u-2-build-linux-amd64/jdk7u67/1368/hotspot/src/share/vm/prims/jvm.cpp:1244
+
+Events (10 events):
+Event: 47.724 loading class 0x00007f304099acb0 done
+Event: 47.726 loading class 0x00007f30409193c0
+Event: 47.726 loading class 0x00007f30409193c0 done
+Event: 47.734 loading class 0x00007f30449a4b70
+Event: 47.734 loading class 0x00007f3044995960
+Event: 47.734 loading class 0x00007f3044995960 done
+Event: 47.734 loading class 0x00007f30449a4b70 done
+Event: 48.650 loading class 0x00007f304498fd90
+Event: 48.664 loading class 0x00007f304498fd90 done
+Event: 52.489 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 ca:01 658655                             /usr/lib/jvm/java-7-oracle-cloudera/bin/java
+00600000-00601000 rw-p 00000000 ca:01 658655                             /usr/lib/jvm/java-7-oracle-cloudera/bin/java
+00f93000-02001000 rw-p 00000000 00:00 0                                  [heap]
+760000000-761500000 rw-p 00000000 00:00 0 
+761500000-780000000 rw-p 00000000 00:00 0 
+780000000-785300000 rw-p 00000000 00:00 0 
+785300000-7d5500000 rw-p 00000000 00:00 0 
+7d5500000-7d7f00000 rw-p 00000000 00:00 0 
+7d9f00000-800000000 rw-p 00000000 00:00 0 
+7f302b000000-7f3030000000 rw-p 00000000 00:00 0 
+7f3030000000-7f3030b90000 rw-p 00000000 00:00 0 
+7f3030b90000-7f3034000000 ---p 00000000 00:00 0 
+7f303683c000-7f303683d000 rw-p 00000000 00:00 0 
+7f303683d000-7f3036848000 r--s 0037c000 ca:01 657765                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/charsets.jar
+7f3036848000-7f3036852000 r--s 00251000 ca:01 658329                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/resources.jar
+7f3036852000-7f3036855000 ---p 00000000 00:00 0 
+7f3036855000-7f3036953000 rw-p 00000000 00:00 0 
+7f3036953000-7f3036956000 ---p 00000000 00:00 0 
+7f3036956000-7f303698c000 rw-p 00000000 00:00 0                          [stack:14336]
+7f303698c000-7f303698d000 r--s 00009000 ca:01 1839095                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-cli-1.1.0-cdh5.8.2.jar
+7f303698d000-7f30369be000 rw-p 00000000 00:00 0 
+7f30369be000-7f30369d4000 r-xp 00000000 ca:01 658246                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnet.so
+7f30369d4000-7f3036bd4000 ---p 00016000 ca:01 658246                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnet.so
+7f3036bd4000-7f3036bd5000 rw-p 00016000 ca:01 658246                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnet.so
+7f3036bd5000-7f3036be5000 r-xp 00000000 ca:01 658234                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnio.so
+7f3036be5000-7f3036de5000 ---p 00010000 ca:01 658234                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnio.so
+7f3036de5000-7f3036de6000 rw-p 00010000 ca:01 658234                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libnio.so
+7f3036de6000-7f3036de9000 r--s 00012000 ca:01 1838165                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/metrics-core-2.2.0.jar
+7f3036de9000-7f3036e06000 r--s 00196000 ca:01 1838762                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/netty-all-4.0.23.Final.jar
+7f3036e06000-7f3036e08000 r--s 00017000 ca:01 1838723                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-prefix-tree-1.2.0-cdh5.8.2.jar
+7f3036e08000-7f3036e0e000 r--s 0007e000 ca:01 675511                     /usr/share/cmf/common_jars/postgresql-9.0-801.jdbc4.jar
+7f3036e0e000-7f3036f1f000 rw-p 00000000 00:00 0 
+7f3036f1f000-7f3037637000 r--s 05fc4000 ca:01 1838207                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/spark-assembly-1.6.0-cdh5.8.2-hadoop2.6.0-cdh5.8.2.jar
+7f3037637000-7f303763f000 r--s 00058000 ca:01 1838380                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/velocity-1.5.jar
+7f303763f000-7f3037642000 r--s 0000b000 ca:01 1838779                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/tempus-fugit-1.1.jar
+7f3037642000-7f3037645000 r--s 00014000 ca:01 1838710                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/super-csv-2.2.0.jar
+7f3037645000-7f3037648000 r--s 00022000 ca:01 1838753                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/stringtemplate-3.2.1.jar
+7f3037648000-7f303764a000 r--s 00005000 ca:01 1838804                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/stax-api-1.0.1.jar
+7f303764a000-7f303764e000 r--s 00036000 ca:01 1838479                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/ST4-4.0.4.jar
+7f303764e000-7f3037650000 r--s 00005000 ca:01 1838997                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/regexp-1.3.jar
+7f3037650000-7f3037655000 r--s 00039000 ca:01 1838887                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/plexus-utils-1.5.6.jar
+7f3037655000-7f3037657000 r--s 0000a000 ca:01 1838544                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar
+7f3037657000-7f3037659000 r--s 0000e000 ca:01 1839115                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/oro-2.0.8.jar
+7f3037659000-7f303765a000 r--s 00004000 ca:01 1838790                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/opencsv-2.3.jar
+7f303765a000-7f303767b000 r--s 00162000 ca:01 1838300                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/mockito-all-1.9.5.jar
+7f303767b000-7f303767d000 r--s 00006000 ca:01 1838962                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/metrics-jvm-3.0.2.jar
+7f303767d000-7f303767e000 r--s 00003000 ca:01 1838640                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/metrics-json-3.0.2.jar
+7f303767e000-7f3037681000 r--s 0000f000 ca:01 1838321                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/maven-scm-provider-svnexe-1.4.jar
+7f3037681000-7f3037683000 r--s 00008000 ca:01 1838778                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/maven-scm-provider-svn-commons-1.4.jar
+7f3037683000-7f3037687000 r--s 00014000 ca:01 1838805                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/maven-scm-api-1.4.jar
+7f3037687000-7f303768e000 r--s 00067000 ca:01 1838239                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/mail-1.4.1.jar
+7f303768e000-7f3037697000 r--s 0006d000 ca:01 1838515                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/log4j-1.2.16.jar
+7f3037697000-7f303769d000 r--s 00034000 ca:01 1838230                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/libthrift-0.9.3.jar
+7f303769d000-7f30376a4000 r--s 00046000 ca:01 1838373                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/libfb303-0.9.3.jar
+7f30376a4000-7f30376a5000 r--s 00003000 ca:01 1838555                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jta-1.1.jar
+7f30376a5000-7f30376a6000 r--s 00002000 ca:01 1838734                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jpam-1.1.jar
+7f30376a6000-7f30376b5000 r--s 00074000 ca:01 1838853                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/joda-time-1.6.jar
+7f30376b5000-7f30376b9000 r--s 00031000 ca:01 1838556                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jline-2.12.jar
+7f30376b9000-7f30376d3000 r--s 00181000 ca:01 1838923                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jetty-all-server-7.6.0.v20120127.jar
+7f30376d3000-7f30376ed000 r--s 00181000 ca:01 1838355                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jetty-all-7.6.0.v20120127.jar
+7f30376ed000-7f30376f0000 r--s 0001c000 ca:01 1838728                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-servlet-1.14.jar
+7f30376f0000-7f30376ff000 r--s 00084000 ca:01 1838660                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-server-1.14.jar
+7f30376ff000-7f3037705000 r--s 0002c000 ca:01 1838866                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jdo-api-3.0.1.jar
+7f3037705000-7f3037707000 r--s 0000d000 ca:01 1838409                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jcommander-1.32.jar
+7f3037707000-7f3037710000 r--s 0008d000 ca:01 1838681                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/janino-2.7.6.jar
+7f3037710000-7f3037712000 r--s 00004000 ca:01 1838945                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jamon-runtime-2.3.1.jar
+7f3037712000-7f3037713000 r--s 00006000 ca:01 1838744                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-xc-1.9.2.jar
+7f3037713000-7f3037714000 r--s 00004000 ca:01 1839108                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-jaxrs-1.9.2.jar
+7f3037714000-7f3037725000 r--s 000c3000 ca:01 1838608                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-databind-2.2.2.jar
+7f3037725000-7f3037728000 r--s 0002c000 ca:01 1838920                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-core-2.2.2.jar
+7f3037728000-7f303772b000 r--s 00006000 ca:01 1838158                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-annotations-2.2.2.jar
+7f303772b000-7f3037744000 r--s 00152000 ca:01 1838481                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/htrace-core-3.2.0-incubating.jar
+7f3037744000-7f3037745000 r--s 00003000 ca:01 1839028                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-testutils-1.1.0-cdh5.8.2.jar
+7f3037745000-7f3037746000 r--s 00003000 ca:01 1838519                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-shims-scheduler-1.1.0-cdh5.8.2.jar
+7f3037746000-7f3037749000 r--s 00018000 ca:01 1838201                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-shims-common-1.1.0-cdh5.8.2.jar
+7f3037749000-7f303774a000 r--s 00002000 ca:01 1838901                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-shims-1.1.0-cdh5.8.2.jar
+7f303774a000-7f303774c000 r--s 0000d000 ca:01 1838552                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-shims-0.23-1.1.0-cdh5.8.2.jar
+7f303774c000-7f303776f000 r--s 001d2000 ca:01 1838455                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-service-1.1.0-cdh5.8.2.jar
+7f303776f000-7f3037780000 r--s 000ba000 ca:01 1838957                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-serde-1.1.0-cdh5.8.2.jar
+7f3037780000-7f30377e3000 r--s 004e2000 ca:01 1839046                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-metastore-1.1.0-cdh5.8.2.jar
+7f30377e3000-7f3037823000 rw-p 00000000 00:00 0 
+7f3037823000-7f30379e0000 r--s 015db000 ca:01 1838501                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-jdbc-1.1.0-cdh5.8.2-standalone.jar
+7f30379e0000-7f30379e2000 r--s 00016000 ca:01 1838825                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-jdbc-1.1.0-cdh5.8.2.jar
+7f30379e2000-7f30379e3000 r--s 00006000 ca:01 1838473                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-hwi-1.1.0-cdh5.8.2.jar
+7f30379e3000-7f30379e5000 r--s 0001b000 ca:01 1838592                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-hbase-handler-1.1.0-cdh5.8.2.jar
+7f30379e5000-7f3037a14000 rw-p 00000000 00:00 0 
+7f3037a14000-7f3037b4c000 r--s 01133000 ca:01 1838340                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-exec-1.1.0-cdh5.8.2.jar
+7f3037b4c000-7f3037b50000 r--s 0001b000 ca:01 1838882                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-contrib-1.1.0-cdh5.8.2.jar
+7f3037b50000-7f3037b55000 r--s 00046000 ca:01 1838609                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-common-1.1.0-cdh5.8.2.jar
+7f3037b55000-7f3037b56000 r--s 00009000 ca:01 1839095                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-cli-1.1.0-cdh5.8.2.jar
+7f3037b56000-7f3037b59000 r--s 00021000 ca:01 1838849                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-beeline-1.1.0-cdh5.8.2.jar
+7f3037b59000-7f3037b5a000 r--s 0000a000 ca:01 1838679                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-ant-1.1.0-cdh5.8.2.jar
+7f3037b5a000-7f3037b5c000 r--s 0001a000 ca:01 1838656                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hive-accumulo-handler-1.1.0-cdh5.8.2.jar
+7f3037b5c000-7f3037b5f000 r--s 00015000 ca:01 1838421                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/high-scale-lib-1.1.1.jar
+7f3037b5f000-7f3037b95000 r--s 003e5000 ca:01 1838727                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-server-1.2.0-cdh5.8.2.jar
+7f3037b95000-7f3037bce000 r--s 003f4000 ca:01 1838600                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-protocol-1.2.0-cdh5.8.2.jar
+7f3037bce000-7f3037bd0000 r--s 00008000 ca:01 1839066                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-hadoop-compat-1.2.0-cdh5.8.2.jar
+7f3037bd0000-7f3037bd4000 r--s 00015000 ca:01 1839107                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-hadoop2-compat-1.2.0-cdh5.8.2.jar
+7f3037bd4000-7f3037bde000 r--s 00085000 ca:01 1838214                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-common-1.2.0-cdh5.8.2.jar
+7f3037bde000-7f3037bf0000 r--s 0012b000 ca:01 1838169                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-client-1.2.0-cdh5.8.2.jar
+7f3037bf0000-7f3037bf2000 r--s 00004000 ca:01 1838742                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hbase-annotations-1.2.0-cdh5.8.2.jar
+7f3037bf2000-7f3037bf4000 r--s 00011000 ca:01 1838533                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hamcrest-core-1.1.jar
+7f3037bf4000-7f3037c1d000 r--s 001ee000 ca:01 1838453                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/guava-14.0.1.jar
+7f3037c1d000-7f3037c8c000 r--s 0063e000 ca:01 1838310                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/groovy-all-2.4.4.jar
+7f3037c8c000-7f3037c8d000 r--s 00003000 ca:01 1838448                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/geronimo-jta_1.1_spec-1.1.1.jar
+7f3037c8d000-7f3037c8f000 r--s 00006000 ca:01 1838195                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/geronimo-jaspic_1.0_spec-1.0.jar
+7f3037c8f000-7f3037c91000 r--s 00002000 ca:01 1838916                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/geronimo-annotation_1.0_spec-1.1.1.jar
+7f3037c91000-7f3037c93000 r--s 00002000 ca:01 1838264                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/findbugs-annotations-1.3.9-1.jar
+7f3037c93000-7f3037c95000 r--s 00003000 ca:01 1838618                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/eigenbase-properties-1.1.4.jar
+7f3037c95000-7f3037cbf000 r--s 002cc000 ca:01 1838487                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/derby-10.11.1.1.jar
+7f3037cbf000-7f3037cd5000 r--s 001a4000 ca:01 1839047                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/datanucleus-rdbms-3.2.9.jar
+7f3037cd5000-7f3037ced000 r--s 001b6000 ca:01 1838602                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/datanucleus-core-3.2.10.jar
+7f3037ced000-7f3037cf2000 r--s 0004e000 ca:01 1838985                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/datanucleus-api-jdo-3.2.6.jar
+7f3037cf2000-7f3037cf9000 r--s 00036000 ca:01 1838947                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-recipes-2.6.0.jar
+7f3037cf9000-7f3037cff000 r--s 00028000 ca:01 1839119                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-framework-2.6.0.jar
+7f3037cff000-7f3037d01000 r--s 0000f000 ca:01 1838819                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-client-2.6.0.jar
+7f3037d01000-7f3037d0a000 r--s 0005d000 ca:01 1839112                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-vfs2-2.0.jar
+7f3037d0a000-7f3037d0d000 r--s 00015000 ca:01 1839155                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-pool-1.5.4.jar
+7f3037d0d000-7f3037d1e000 r--s 000bb000 ca:01 1839126                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-math-2.1.jar
+7f3037d1e000-7f3037d23000 r--s 00040000 ca:01 1839091                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-httpclient-3.0.1.jar
+7f3037d23000-7f3037d26000 r--s 00025000 ca:01 1838787                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-dbcp-1.4.jar
+7f3037d26000-7f3037d28000 r--s 00006000 ca:01 1838484                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-compiler-2.7.6.jar
+7f3037d28000-7f3037d32000 r--s 00060000 ca:01 1838902                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/calcite-linq4j-1.0.0-incubating.jar
+7f3037d32000-7f3037d67000 r--s 002f0000 ca:01 1838420                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/calcite-core-1.0.0-incubating.jar
+7f3037d67000-7f3037d6d000 r--s 0002f000 ca:01 1838856                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/calcite-avatica-1.0.0-incubating.jar
+7f3037d6d000-7f3037d70000 r--s 00019000 ca:01 1838330                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/bonecp-0.8.0.RELEASE.jar
+7f3037d70000-7f3037d72000 r--s 00004000 ca:01 1839165                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/asm-tree-3.1.jar
+7f3037d72000-7f3037d73000 r--s 00007000 ca:01 1838489                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/asm-commons-3.1.jar
+7f3037d73000-7f3037d7b000 r--s 00066000 ca:01 1838921                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/apache-log4j-extras-1.2.17.jar
+7f3037d7b000-7f3037d7f000 r--s 00025000 ca:01 1838404                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/antlr-runtime-3.4.jar
+7f3037d7f000-7f3037d84000 r--s 00068000 ca:01 1839021                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/antlr-2.7.7.jar
+7f3037d84000-7f3037d85000 r--s 00004000 ca:01 1838911                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/ant-launcher-1.9.1.jar
+7f3037d85000-7f3037da3000 r--s 001ca000 ca:01 1838992                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/ant-1.9.1.jar
+7f3037da3000-7f3037da6000 r--s 0001a000 ca:01 1838715                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/accumulo-trace-1.6.0.jar
+7f3037da6000-7f3037da9000 r--s 0000c000 ca:01 1838908                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/accumulo-start-1.6.0.jar
+7f3037da9000-7f3037dab000 r--s 00017000 ca:01 1838281                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/accumulo-fate-1.6.0.jar
+7f3037dab000-7f3037dfa000 r--s 003dc000 ca:01 1838293                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/accumulo-core-1.6.0.jar
+7f3037dfa000-7f3037dfb000 r--s 00004000 ca:01 1839117                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-datajoin-2.6.0-cdh5.8.2.jar
+7f3037dfb000-7f3037dfe000 r--s 0001b000 ca:01 1838227                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-openstack-2.6.0-cdh5.8.2.jar
+7f3037dfe000-7f3037dff000 r--s 00002000 ca:01 1838494                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-hs-plugins-2.6.0-cdh5.8.2.jar
+7f3037dff000-7f3037e01000 r--s 00019000 ca:01 1838162                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-streaming-2.6.0-cdh5.8.2.jar
+7f3037e01000-7f3037e03000 r--s 0000f000 ca:01 1838879                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-extras-2.6.0-cdh5.8.2.jar
+7f3037e03000-7f3037e25000 r--s 001bb000 ca:01 1838441                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-distcp-2.6.0-cdh5.8.2.jar
+7f3037e25000-7f3037e28000 r--s 00006000 ca:01 1838666                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-annotations-2.2.3.jar
+7f3037e28000-7f3037e2c000 r--s 0002c000 ca:01 1838754                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-core-2.2.3.jar
+7f3037e2c000-7f3037e2d000 r--s 00006000 ca:01 1838907                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-archives-2.6.0-cdh5.8.2.jar
+7f3037e2d000-7f3037e30000 r--s 00012000 ca:01 1838431                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/metrics-core-3.0.2.jar
+7f3037e30000-7f3037e36000 r--s 0003f000 ca:01 1838596                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-rumen-2.6.0-cdh5.8.2.jar
+7f3037e36000-7f3037e3f000 r--s 00086000 ca:01 1838757                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/microsoft-windowsazure-storage-sdk-0.6.0.jar
+7f3037e3f000-7f3037e42000 r--s 00028000 ca:01 1839153                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-hs-2.6.0-cdh5.8.2.jar
+7f3037e42000-7f3037e47000 r--s 0003f000 ca:01 1838739                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-examples-2.6.0-cdh5.8.2.jar
+7f3037e47000-7f3037e48000 r--s 00005000 ca:01 1839166                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-archive-logs-2.6.0-cdh5.8.2.jar
+7f3037e48000-7f3037e59000 r--s 000c3000 ca:01 1838984                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-databind-2.2.3.jar
+7f3037e59000-7f3037e5a000 r--s 0000a000 ca:01 1839080                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-jobclient-2.6.0-cdh5.8.2.jar
+7f3037e5a000-7f3037e64000 r--s 00077000 ca:01 1838200                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-app-2.6.0-cdh5.8.2.jar
+7f3037e64000-7f3037e65000 r--s 00003000 ca:01 1838810                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-ant-2.6.0-cdh5.8.2.jar
+7f3037e65000-7f3037e67000 r--s 0000c000 ca:01 1838668                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-shuffle-2.6.0-cdh5.8.2.jar
+7f3037e67000-7f3037e6a000 r--s 0001a000 ca:01 1838298                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-sls-2.6.0-cdh5.8.2.jar
+7f3037e6a000-7f3037e77000 r--s 000ac000 ca:01 1838987                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-common-2.6.0-cdh5.8.2.jar
+7f3037e77000-7f3037e8f000 r--s 00162000 ca:01 1838186                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-core-2.6.0-cdh5.8.2.jar
+7f3037e8f000-7f3037ea5000 r--s 00159000 ca:01 1839178                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-jobclient-2.6.0-cdh5.8.2-tests.jar
+7f3037ea5000-7f3037ea8000 r--s 00014000 ca:01 1838741                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-mapreduce-client-nativetask-2.6.0-cdh5.8.2.jar
+7f3037ea8000-7f3037eac000 r--s 0001f000 ca:01 1838253                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-azure-2.6.0-cdh5.8.2.jar
+7f3037eac000-7f3037eb0000 r--s 00032000 ca:01 1838952                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-gridmix-2.6.0-cdh5.8.2.jar
+7f3037eb0000-7f3037eb2000 r--s 00008000 ca:01 1838623                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-web-proxy-2.6.0-cdh5.8.2.jar
+7f3037eb2000-7f3037eb5000 r--s 00017000 ca:01 1838761                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-registry-2.6.0-cdh5.8.2.jar
+7f3037eb5000-7f3037ec3000 r--s 000a5000 ca:01 1838645                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-nodemanager-2.6.0-cdh5.8.2.jar
+7f3037ec3000-7f3037ede000 r--s 001b6000 ca:01 1839000                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-api-2.6.0-cdh5.8.2.jar
+7f3037ede000-7f3037edf000 r--s 0000c000 ca:01 1838915                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-applications-distributedshell-2.6.0-cdh5.8.2.jar
+7f3037edf000-7f3037ee3000 r--s 00027000 ca:01 1838982                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-applicationhistoryservice-2.6.0-cdh5.8.2.jar
+7f3037ee3000-7f3037ee5000 r--s 00001000 ca:01 1838880                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-tests-2.6.0-cdh5.8.2.jar
+7f3037ee5000-7f3037ef9000 r--s 00105000 ca:01 1839128                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-resourcemanager-2.6.0-cdh5.8.2.jar
+7f3037ef9000-7f3037f0f000 r--s 00166000 ca:01 1839017                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-common-2.6.0-cdh5.8.2.jar
+7f3037f0f000-7f3037f60000 r--s 003f9000 ca:01 1838629                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/spark-1.6.0-cdh5.8.2-yarn-shuffle.jar
+7f3037f60000-7f3038000000 r--s 00a44000 ca:01 1838752                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-hdfs-2.6.0-cdh5.8.2.jar
+7f3038000000-7f3038021000 rw-p 00000000 00:00 0 
+7f3038021000-7f303c000000 ---p 00000000 00:00 0 
+7f303c000000-7f303c001000 r--s 00004000 ca:01 1839133                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-applications-unmanaged-am-launcher-2.6.0-cdh5.8.2.jar
+7f303c001000-7f303c005000 r--s 00023000 ca:01 1838546                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-client-2.6.0-cdh5.8.2.jar
+7f303c005000-7f303c00b000 r--s 00048000 ca:01 1838211                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-yarn-server-common-2.6.0-cdh5.8.2.jar
+7f303c00b000-7f303c00d000 r--s 0000e000 ca:01 1838594                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/guice-servlet-3.0.jar
+7f303c00d000-7f303c010000 r--s 0001d000 ca:01 1838953                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-client-1.9.jar
+7f303c010000-7f303c011000 r--s 00003000 ca:01 1838851                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-guice-1.9.jar
+7f303c011000-7f303c012000 r--s 00000000 ca:01 1838386                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/javax.inject-1.jar
+7f303c012000-7f303c014000 r--s 00000000 ca:01 1839013                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/aopalliance-1.0.jar
+7f303c014000-7f303c017000 r--s 00030000 ca:01 1838785                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jline-2.11.jar
+7f303c017000-7f303c026000 r--s 0009f000 ca:01 1838178                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/guice-3.0.jar
+7f303c026000-7f303c028000 r--s 00019000 ca:01 1838364                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-hdfs-nfs-2.6.0-cdh5.8.2.jar
+7f303c028000-7f303c04e000 r--s 00336000 ca:01 1838788                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-hdfs-2.6.0-cdh5.8.2-tests.jar
+7f303c04e000-7f303c056000 r--s 00028000 ca:01 1838472                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/xml-apis-1.3.04.jar
+7f303c056000-7f303c059000 r--s 000fd000 ca:01 1838589                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/leveldbjni-all-1.8.jar
+7f303c059000-7f303c05a000 r--s 00005000 ca:01 1838925                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-daemon-1.0.13.jar
+7f303c05a000-7f303c072000 r--s 00115000 ca:01 1839078                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/xercesImpl-2.9.1.jar
+7f303c072000-7f303c076000 r--s 00034000 ca:01 1839105                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-core-asl-1.8.8.jar
+7f303c076000-7f303c083000 r--s 00097000 ca:01 1838970                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-mapper-asl-1.8.8.jar
+7f303c083000-7f303c097000 r--s 000c8000 ca:01 1838305                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-column-1.5.0-cdh5.8.2.jar
+7f303c097000-7f303c0a9000 r--s 000d1000 ca:01 1838930                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-jackson-1.5.0-cdh5.8.2.jar
+7f303c0a9000-7f303c0ab000 r--s 00005000 ca:01 1838798                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-cascading-1.5.0-cdh5.8.2.jar
+7f303c0ab000-7f303c0ae000 r--s 0001e000 ca:01 1838593                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-format-2.1.0-cdh5.8.2-javadoc.jar
+7f303c0ae000-7f303c0ff000 r--s 00337000 ca:01 1838252                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-aws-2.6.0-cdh5.8.2.jar
+7f303c0ff000-7f303c134000 r--s 00264000 ca:01 1838698                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-hadoop-bundle-1.5.0-cdh5.8.2.jar
+7f303c134000-7f303c135000 r--s 00001000 ca:01 1839029                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-format-2.1.0-cdh5.8.2-sources.jar
+7f303c135000-7f303c137000 r--s 0000f000 ca:01 1838456                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-tools-1.5.0-cdh5.8.2.jar
+7f303c137000-7f303c13d000 r--s 0003f000 ca:01 1838743                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-encoding-1.5.0-cdh5.8.2.jar
+7f303c13d000-7f303c13e000 r--s 00005000 ca:01 1838470                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-scrooge_2.10-1.5.0-cdh5.8.2.jar
+7f303c13e000-7f303c145000 r--s 00057000 ca:01 1838900                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-format-2.1.0-cdh5.8.2.jar
+7f303c145000-7f303c148000 r--s 00010000 ca:01 1838156                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-auth-2.6.0-cdh5.8.2.jar
+7f303c148000-7f303c14a000 r--s 00007000 ca:01 1838826                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-scala_2.10-1.5.0-cdh5.8.2.jar
+7f303c14a000-7f303c14c000 r--s 00004000 ca:01 1839134                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-annotations-2.6.0-cdh5.8.2.jar
+7f303c14c000-7f303c14e000 r--s 00013000 ca:01 1838462                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-pig-1.5.0-cdh5.8.2.jar
+7f303c14e000-7f303c152000 r--s 00030000 ca:01 1838536                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-hadoop-1.5.0-cdh5.8.2.jar
+7f303c152000-7f303c153000 r--s 00005000 ca:01 1838460                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-generator-1.5.0-cdh5.8.2.jar
+7f303c153000-7f303c158000 r--s 0002e000 ca:01 1838647                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-thrift-1.5.0-cdh5.8.2.jar
+7f303c158000-7f303c15b000 r--s 0000a000 ca:01 1838585                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-protobuf-1.5.0-cdh5.8.2.jar
+7f303c15b000-7f303c15e000 r--s 00017000 ca:01 1838776                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-avro-1.5.0-cdh5.8.2.jar
+7f303c15e000-7f303c160000 r--s 00009000 ca:01 1838561                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-common-1.5.0-cdh5.8.2.jar
+7f303c160000-7f303c161000 r--s 00001000 ca:01 1838865                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-test-hadoop2-1.5.0-cdh5.8.2.jar
+7f303c161000-7f303c166000 r--s 00023000 ca:01 1838265                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-nfs-2.6.0-cdh5.8.2.jar
+7f303c166000-7f303c16a000 r--s 0008a000 ca:01 657766                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/jsse.jar
+7f303c16a000-7f303c1a1000 r--s 00315000 ca:01 1839156                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-common-2.6.0-cdh5.8.2.jar
+7f303c1a1000-7f303c1c0000 r--s 001ba000 ca:01 1838688                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hadoop-common-2.6.0-cdh5.8.2-tests.jar
+7f303c1c0000-7f303c1f6000 r--s 00276000 ca:01 1838490                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/parquet-pig-bundle-1.5.0-cdh5.8.2.jar
+7f303c1f6000-7f303c213000 r--s 0013e000 ca:01 1838835                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/mockito-all-1.8.5.jar
+7f303c213000-7f303c219000 r--s 00028000 ca:01 1839116                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-framework-2.7.1.jar
+7f303c219000-7f303c21b000 r--s 00005000 ca:01 1838686                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/slf4j-api-1.7.5.jar
+7f303c21b000-7f303c21c000 r--s 00004000 ca:01 1838166                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-jaxrs-1.8.8.jar
+7f303c21c000-7f303c21d000 r--s 00004000 ca:01 1838167                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/java-xmlbuilder-0.4.jar
+7f303c21d000-7f303c21f000 r--s 0000d000 ca:01 1838534                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-codec-1.4.jar
+7f303c21f000-7f303c231000 r--s 00097000 ca:01 1838612                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/apacheds-kerberos-codec-2.0.0-M15.jar
+7f303c231000-7f303c252000 r--s 00172000 ca:01 1838633                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/guava-11.0.2.jar
+7f303c252000-7f303c253000 r--s 00003000 ca:01 1838610                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/xmlenc-0.52.jar
+7f303c253000-7f303c256000 r--s 00019000 ca:01 1838949                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-el-1.0.jar
+7f303c256000-7f303c25b000 r--s 0003e000 ca:01 1838475                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-net-3.1.jar
+7f303c25b000-7f303c25d000 r--s 000f2000 ca:01 1838651                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/snappy-java-1.0.4.1.jar
+7f303c25d000-7f303c27a000 r--s 0016a000 ca:01 1839109                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-math3-3.1.1.jar
+7f303c27a000-7f303c280000 r--s 00043000 ca:01 1838323                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-configuration-1.6.jar
+7f303c280000-7f303c281000 r--s 00003000 ca:01 1838628                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/logredactor-1.0.3.jar
+7f303c281000-7f303c286000 r--s 0005f000 ca:01 1838488                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jasper-compiler-5.5.23.jar
+7f303c286000-7f303c29f000 r--s 00152000 ca:01 1839032                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/htrace-core4-4.0.1-incubating.jar
+7f303c29f000-7f303c2b1000 r--s 00139000 ca:01 1838590                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/zookeeper-3.4.5-cdh5.8.2.jar
+7f303c2b1000-7f303c2b4000 r--s 00017000 ca:01 1839175                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jaxb-api-2.2.2.jar
+7f303c2b4000-7f303c2bf000 r--s 00073000 ca:01 1838691                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/aws-java-sdk-core-1.10.6.jar
+7f303c2bf000-7f303c2c1000 r--s 0000e000 ca:01 1838202                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/activation-1.1.jar
+7f303c2c1000-7f303c2c5000 r--s 00020000 ca:01 1838726                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-digester-1.8.jar
+7f303c2c5000-7f303c2d7000 r--s 0009d000 ca:01 1839135                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-server-1.9.jar
+7f303c2d7000-7f303c2db000 r--s 00014000 ca:01 1838512                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/xz-1.0.jar
+7f303c2db000-7f303c2e4000 r--s 0007b000 ca:01 1838430                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jets3t-0.9.0.jar
+7f303c2e4000-7f303c2e9000 r--s 0002a000 ca:01 1838193                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-beanutils-1.7.0.jar
+7f303c2e9000-7f303c2ef000 r--s 00032000 ca:01 1838284                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/httpcore-4.2.5.jar
+7f303c2ef000-7f303c2f1000 r--s 00006000 ca:01 1838237                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/paranamer-2.3.jar
+7f303c2f1000-7f303c2f9000 r--s 0003b000 ca:01 1838516                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-recipes-2.7.1.jar
+7f303c2f9000-7f303c305000 r--s 00080000 ca:01 1838756                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/aws-java-sdk-s3-1.10.6.jar
+7f303c305000-7f303c333000 r--s 0023d000 ca:01 1838312                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hue-plugins-3.9.0-cdh5.8.2.jar
+7f303c333000-7f303c337000 r--s 0002f000 ca:01 1838619                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-beanutils-core-1.8.0.jar
+7f303c337000-7f303c33a000 r--s 00006000 ca:01 1838163                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jsr305-3.0.0.jar
+7f303c33a000-7f303c33c000 r--s 00003000 ca:01 1838976                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/api-asn1-api-1.0.0-M20.jar
+7f303c33c000-7f303c342000 r--s 0003a000 ca:01 1838998                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/aws-java-sdk-kms-1.10.6.jar
+7f303c342000-7f303c345000 r--s 0002b000 ca:01 1838229                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jsch-0.1.42.jar
+7f303c345000-7f303c346000 r--s 0000a000 ca:01 1838796                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/asm-3.2.jar
+7f303c346000-7f303c34b000 r--s 0002a000 ca:01 1838658                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/gson-2.2.4.jar
+7f303c34b000-7f303c351000 r--s 00036000 ca:01 1838393                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/junit-4.11.jar
+7f303c351000-7f303c35a000 r--s 00061000 ca:01 1838437                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/httpclient-4.2.5.jar
+7f303c35a000-7f303c35c000 r--s 0000e000 ca:01 1838617                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-logging-1.1.3.jar
+7f303c35c000-7f303c35e000 r--s 00009000 ca:01 1838550                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-cli-1.2.jar
+7f303c35e000-7f303c363000 r--s 00041000 ca:01 1838440                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-lang-2.6.jar
+7f303c363000-7f303c365000 r--s 0000f000 ca:01 1838587                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jettison-1.1.jar
+7f303c365000-7f303c36c000 r--s 0007e000 ca:01 1838241                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jetty-6.1.26.cloudera.4.jar
+7f303c36c000-7f303c36d000 ---p 00000000 00:00 0 
+7f303c36d000-7f303c46d000 rw-p 00000000 00:00 0                          [stack:14212]
+7f303c46d000-7f303c470000 ---p 00000000 00:00 0 
+7f303c470000-7f303c56e000 rw-p 00000000 00:00 0                          [stack:14210]
+7f303c56e000-7f303c571000 ---p 00000000 00:00 0 
+7f303c571000-7f303c66f000 rw-p 00000000 00:00 0                          [stack:14207]
+7f303c66f000-7f303c672000 ---p 00000000 00:00 0 
+7f303c672000-7f303c770000 rw-p 00000000 00:00 0                          [stack:14205]
+7f303c770000-7f303c773000 ---p 00000000 00:00 0 
+7f303c773000-7f303c871000 rw-p 00000000 00:00 0                          [stack:14201]
+7f303c871000-7f303c9fa000 r--p 00000000 ca:01 1577                       /usr/lib/locale/locale-archive
+7f303c9fa000-7f303c9fd000 ---p 00000000 00:00 0 
+7f303c9fd000-7f303cafb000 rw-p 00000000 00:00 0                          [stack:14123]
+7f303cafb000-7f303cafe000 ---p 00000000 00:00 0 
+7f303cafe000-7f303cbfc000 rw-p 00000000 00:00 0                          [stack:14122]
+7f303cbfc000-7f303cbfd000 ---p 00000000 00:00 0 
+7f303cbfd000-7f303d000000 rw-p 00000000 00:00 0                          [stack:14118]
+7f303d000000-7f303d270000 rwxp 00000000 00:00 0 
+7f303d270000-7f30409d0000 rw-p 00000000 00:00 0 
+7f30409d0000-7f3044000000 ---p 00000000 00:00 0 
+7f3044000000-7f3044017000 r--s 0010e000 ca:01 1839075                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/netty-3.6.2.Final.jar
+7f3044017000-7f304401c000 r--s 00036000 ca:01 1838877                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-compress-1.4.1.jar
+7f304401c000-7f304401e000 r--s 00018000 ca:01 1838449                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/servlet-api-2.5.jar
+7f304401e000-7f3044020000 r--s 00004000 ca:01 1838269                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/stax-api-1.0-2.jar
+7f3044020000-7f3044024000 r--s 0002a000 ca:01 1838695                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-io-2.4.jar
+7f3044024000-7f3044028000 r--s 00028000 ca:01 1839121                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jetty-util-6.1.26.cloudera.4.jar
+7f3044028000-7f3044030000 r--s 0007b000 ca:01 1838288                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/protobuf-java-2.5.0.jar
+7f3044030000-7f304403a000 r--s 00066000 ca:01 1838943                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-core-1.9.jar
+7f304403a000-7f304403c000 r--s 0000f000 ca:01 1838665                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/curator-client-2.7.1.jar
+7f304403c000-7f304404f000 r--s 000c7000 ca:01 1838842                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jaxb-impl-2.2.3-1.jar
+7f304404f000-7f3044050000 r--s 00007000 ca:01 1838861                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jackson-xc-1.8.8.jar
+7f3044050000-7f3044054000 r--s 00021000 ca:01 1838643                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jersey-json-1.9.jar
+7f3044054000-7f3044056000 r--s 00011000 ca:01 1838701                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jasper-runtime-5.5.23.jar
+7f3044056000-7f304405f000 r--s 0006f000 ca:01 1839043                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/log4j-1.2.17.jar
+7f304405f000-7f3044068000 r--s 0006c000 ca:01 1838173                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/avro-1.7.6-cdh5.8.2.jar
+7f3044068000-7f304406a000 r--s 00009000 ca:01 1838944                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/hamcrest-core-1.3.jar
+7f304406a000-7f3044070000 r--s 00045000 ca:01 1838627                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-httpclient-3.1.jar
+7f3044070000-7f304407d000 r--s 00083000 ca:01 1838234                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/commons-collections-3.2.2.jar
+7f304407d000-7f304407f000 r--s 00012000 ca:01 1838875                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/api-util-1.0.0-M20.jar
+7f304407f000-7f3044733000 rw-p 00000000 00:00 0 
+7f3044733000-7f30448f2000 r--s 039e5000 ca:01 658351                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/rt.jar
+7f30448f2000-7f3044ef5000 rw-p 00000000 00:00 0 
+7f3044ef5000-7f3044ef6000 ---p 00000000 00:00 0 
+7f3044ef6000-7f3044ff6000 rw-p 00000000 00:00 0                          [stack:14113]
+7f3044ff6000-7f3044ff7000 ---p 00000000 00:00 0 
+7f3044ff7000-7f3045102000 rw-p 00000000 00:00 0                          [stack:14109]
+7f3045102000-7f30451f7000 rw-p 00000000 00:00 0 
+7f30451f7000-7f3045221000 rw-p 00000000 00:00 0 
+7f3045221000-7f30454a2000 rw-p 00000000 00:00 0 
+7f30454a2000-7f30454ad000 rw-p 00000000 00:00 0 
+7f30454ad000-7f30455a2000 rw-p 00000000 00:00 0 
+7f30455a2000-7f30455cc000 rw-p 00000000 00:00 0 
+7f30455cc000-7f304584c000 rw-p 00000000 00:00 0 
+7f304584c000-7f3045862000 rw-p 00000000 00:00 0 
+7f3045862000-7f30459a2000 rw-p 00000000 00:00 0 
+7f30459a2000-7f30459a3000 rw-p 00000000 00:00 0 
+7f30459a3000-7f30459bd000 r-xp 00000000 ca:01 658252                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libzip.so
+7f30459bd000-7f3045bbd000 ---p 0001a000 ca:01 658252                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libzip.so
+7f3045bbd000-7f3045bbe000 rw-p 0001a000 ca:01 658252                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libzip.so
+7f3045bbe000-7f3045bc8000 r-xp 00000000 ca:01 396084                     /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7f3045bc8000-7f3045dc7000 ---p 0000a000 ca:01 396084                     /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7f3045dc7000-7f3045dc8000 r--p 00009000 ca:01 396084                     /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7f3045dc8000-7f3045dc9000 rw-p 0000a000 ca:01 396084                     /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7f3045dc9000-7f3045dd4000 r-xp 00000000 ca:01 396086                     /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7f3045dd4000-7f3045fd3000 ---p 0000b000 ca:01 396086                     /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7f3045fd3000-7f3045fd4000 r--p 0000a000 ca:01 396086                     /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7f3045fd4000-7f3045fd5000 rw-p 0000b000 ca:01 396086                     /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7f3045fd5000-7f3045fec000 r-xp 00000000 ca:01 396081                     /lib/x86_64-linux-gnu/libnsl-2.19.so
+7f3045fec000-7f30461eb000 ---p 00017000 ca:01 396081                     /lib/x86_64-linux-gnu/libnsl-2.19.so
+7f30461eb000-7f30461ec000 r--p 00016000 ca:01 396081                     /lib/x86_64-linux-gnu/libnsl-2.19.so
+7f30461ec000-7f30461ed000 rw-p 00017000 ca:01 396081                     /lib/x86_64-linux-gnu/libnsl-2.19.so
+7f30461ed000-7f30461ef000 rw-p 00000000 00:00 0 
+7f30461ef000-7f30461f8000 r-xp 00000000 ca:01 396082                     /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7f30461f8000-7f30463f7000 ---p 00009000 ca:01 396082                     /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7f30463f7000-7f30463f8000 r--p 00008000 ca:01 396082                     /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7f30463f8000-7f30463f9000 rw-p 00009000 ca:01 396082                     /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7f30463f9000-7f3046422000 r-xp 00000000 ca:01 658275                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libjava.so
+7f3046422000-7f3046622000 ---p 00029000 ca:01 658275                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libjava.so
+7f3046622000-7f3046624000 rw-p 00029000 ca:01 658275                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libjava.so
+7f3046624000-7f3046631000 r-xp 00000000 ca:01 658271                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libverify.so
+7f3046631000-7f3046830000 ---p 0000d000 ca:01 658271                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libverify.so
+7f3046830000-7f3046832000 rw-p 0000c000 ca:01 658271                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/libverify.so
+7f3046832000-7f3046839000 r-xp 00000000 ca:01 396106                     /lib/x86_64-linux-gnu/librt-2.19.so
+7f3046839000-7f3046a38000 ---p 00007000 ca:01 396106                     /lib/x86_64-linux-gnu/librt-2.19.so
+7f3046a38000-7f3046a39000 r--p 00006000 ca:01 396106                     /lib/x86_64-linux-gnu/librt-2.19.so
+7f3046a39000-7f3046a3a000 rw-p 00007000 ca:01 396106                     /lib/x86_64-linux-gnu/librt-2.19.so
+7f3046a3a000-7f3046b3f000 r-xp 00000000 ca:01 396073                     /lib/x86_64-linux-gnu/libm-2.19.so
+7f3046b3f000-7f3046d3e000 ---p 00105000 ca:01 396073                     /lib/x86_64-linux-gnu/libm-2.19.so
+7f3046d3e000-7f3046d3f000 r--p 00104000 ca:01 396073                     /lib/x86_64-linux-gnu/libm-2.19.so
+7f3046d3f000-7f3046d40000 rw-p 00105000 ca:01 396073                     /lib/x86_64-linux-gnu/libm-2.19.so
+7f3046d40000-7f30478b0000 r-xp 00000000 ca:01 658238                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/server/libjvm.so
+7f30478b0000-7f3047aaf000 ---p 00b70000 ca:01 658238                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/server/libjvm.so
+7f3047aaf000-7f3047b74000 rw-p 00b6f000 ca:01 658238                     /usr/lib/jvm/java-7-oracle-cloudera/jre/lib/amd64/server/libjvm.so
+7f3047b74000-7f3047bb4000 rw-p 00000000 00:00 0 
+7f3047bb4000-7f3047d6e000 r-xp 00000000 ca:01 396050                     /lib/x86_64-linux-gnu/libc-2.19.so
+7f3047d6e000-7f3047f6e000 ---p 001ba000 ca:01 396050                     /lib/x86_64-linux-gnu/libc-2.19.so
+7f3047f6e000-7f3047f72000 r--p 001ba000 ca:01 396050                     /lib/x86_64-linux-gnu/libc-2.19.so
+7f3047f72000-7f3047f74000 rw-p 001be000 ca:01 396050                     /lib/x86_64-linux-gnu/libc-2.19.so
+7f3047f74000-7f3047f79000 rw-p 00000000 00:00 0 
+7f3047f79000-7f3047f7c000 r-xp 00000000 ca:01 396059                     /lib/x86_64-linux-gnu/libdl-2.19.so
+7f3047f7c000-7f304817b000 ---p 00003000 ca:01 396059                     /lib/x86_64-linux-gnu/libdl-2.19.so
+7f304817b000-7f304817c000 r--p 00002000 ca:01 396059                     /lib/x86_64-linux-gnu/libdl-2.19.so
+7f304817c000-7f304817d000 rw-p 00003000 ca:01 396059                     /lib/x86_64-linux-gnu/libdl-2.19.so
+7f304817d000-7f3048193000 r-xp 00000000 ca:01 658661                     /usr/lib/jvm/java-7-oracle-cloudera/lib/amd64/jli/libjli.so
+7f3048193000-7f3048393000 ---p 00016000 ca:01 658661                     /usr/lib/jvm/java-7-oracle-cloudera/lib/amd64/jli/libjli.so
+7f3048393000-7f3048394000 rw-p 00016000 ca:01 658661                     /usr/lib/jvm/java-7-oracle-cloudera/lib/amd64/jli/libjli.so
+7f3048394000-7f30483ad000 r-xp 00000000 ca:01 396103                     /lib/x86_64-linux-gnu/libpthread-2.19.so
+7f30483ad000-7f30485ac000 ---p 00019000 ca:01 396103                     /lib/x86_64-linux-gnu/libpthread-2.19.so
+7f30485ac000-7f30485ad000 r--p 00018000 ca:01 396103                     /lib/x86_64-linux-gnu/libpthread-2.19.so
+7f30485ad000-7f30485ae000 rw-p 00019000 ca:01 396103                     /lib/x86_64-linux-gnu/libpthread-2.19.so
+7f30485ae000-7f30485b2000 rw-p 00000000 00:00 0 
+7f30485b2000-7f30485d5000 r-xp 00000000 ca:01 396040                     /lib/x86_64-linux-gnu/ld-2.19.so
+7f30485d5000-7f30485d6000 r--s 0000a000 ca:01 1838661                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/apacheds-i18n-2.0.0-M15.jar
+7f30485d6000-7f3048608000 rw-p 00000000 00:00 0 
+7f3048608000-7f30486be000 rw-p 00000000 00:00 0 
+7f30486be000-7f30486c6000 rw-s 00000000 ca:01 540690                     /tmp/hsperfdata_ubuntu/11285
+7f30486c6000-7f30486c9000 ---p 00000000 00:00 0 
+7f30486c9000-7f30487cb000 rw-p 00000000 00:00 0                          [stack:14105]
+7f30487cb000-7f30487ce000 r--s 00016000 ca:01 1838423                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/jsp-api-2.1.jar
+7f30487ce000-7f30487d0000 r--s 00001000 ca:01 1838812                    /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/jars/slf4j-log4j12-1.7.5.jar
+7f30487d0000-7f30487d1000 rw-p 00000000 00:00 0 
+7f30487d1000-7f30487d2000 ---p 00000000 00:00 0 
+7f30487d2000-7f30487d4000 rw-p 00000000 00:00 0 
+7f30487d4000-7f30487d5000 r--p 00022000 ca:01 396040                     /lib/x86_64-linux-gnu/ld-2.19.so
+7f30487d5000-7f30487d6000 rw-p 00023000 ca:01 396040                     /lib/x86_64-linux-gnu/ld-2.19.so
+7f30487d6000-7f30487d7000 rw-p 00000000 00:00 0 
+7ffedeeca000-7ffedeef4000 rw-p 00000000 00:00 0                          [stack]
+7ffedef2d000-7ffedef2f000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Xmx256m -Dhadoop.log.dir=/opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hadoop/logs -Dhadoop.log.file=hadoop.log -Dhadoop.home.dir=/opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hadoop -Dhadoop.id.str= -Dhadoop.root.logger=INFO,console -Djava.library.path=/opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hadoop/lib/native -Dhadoop.policy.file=hadoop-policy.xml -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Stack=true -Xmx2147483648 -XX:MaxPermSize=512M -Djava.net.preferIPv4Stack=true -Dhadoop.security.logger=INFO,NullAppender 
+java_command: org.apache.hadoop.util.RunJar /opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/bin/../lib/hive/lib/hive-cli-1.1.0-cdh5.8.2.jar org.apache.hadoop.hive.cli.CliDriver --hiveconf hive.aux.jars.path=file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hive/lib/hive-hbase-handler-1.1.0-cdh5.8.2.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-protocol.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-hadoop-compat.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-server.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-client.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/lib/htrace-core-3.2.0-incubating.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/lib/htrace-core.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/lib/htrace-core4-4.0.1-incubating.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-common.jar,file:///opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hbase/hbase-hadoop2-compat.jar,file:///usr/share/cmf/lib/postgresql-9.0-801.jdbc4.jar -i ../testbench.settings
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/lib/jvm/java-7-oracle-cloudera
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+LD_LIBRARY_PATH=:/opt/cloudera/parcels/CDH-5.8.2-1.cdh5.8.2.p0.3/lib/hadoop/lib/native
+SHELL=/bin/bash
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x99f4a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x99f4a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x81a860], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x81a860], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x81a860], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x81a860], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x81c060], sa_mask[0]=0x00000000, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x81d160], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: SIG_IGN, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGTERM: [libjvm.so+0x81d160], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x81d160], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:jessie/sid
+
+uname:Linux 3.13.0-96-generic #143-Ubuntu SMP Mon Aug 29 20:15:20 UTC 2016 x86_64
+libc:glibc 2.19 NPTL 2.19 
+rlimit: STACK 8192k, CORE 0k, NPROC 63794, NOFILE 4096, AS infinity
+load average:111.39 63.91 30.76
+
+/proc/meminfo:
+MemTotal:        8175612 kB
+MemFree:          900844 kB
+Buffers:            1132 kB
+Cached:            57996 kB
+SwapCached:            0 kB
+Active:          7029476 kB
+Inactive:          42304 kB
+Active(anon):    7025156 kB
+Inactive(anon):     1144 kB
+Active(file):       4320 kB
+Inactive(file):    41160 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:               320 kB
+Writeback:             0 kB
+AnonPages:       7012972 kB
+Mapped:            15232 kB
+Shmem:             13328 kB
+Slab:              69208 kB
+SReclaimable:      29556 kB
+SUnreclaim:        39652 kB
+KernelStack:       12416 kB
+PageTables:        30784 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     4087804 kB
+Committed_AS:   15247224 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       26788 kB
+VmallocChunk:   34359665832 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   4188160 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:       55296 kB
+DirectMap2M:     8464384 kB
+
+
+CPU:total 2 (1 cores per cpu, 2 threads per core) family 6 model 63 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, erms, ht, tsc
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz
+stepping	: 2
+microcode	: 0x25
+cpu MHz		: 2400.090
+cache size	: 30720 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology eagerfpu pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveopt fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 4800.18
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 63
+model name	: Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz
+stepping	: 2
+microcode	: 0x25
+cpu MHz		: 2400.090
+cache size	: 30720 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 1
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology eagerfpu pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveopt fsgsbase bmi1 avx2 smep bmi2 erms invpcid
+bogomips	: 4800.18
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8175612k(900844k free), swap 0k(0k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (24.65-b04) for linux-amd64 JRE (1.7.0_67-b01), built on Jul 25 2014 09:20:21 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Wed Feb 22 19:14:05 2017
+elapsed time: 75 seconds
+

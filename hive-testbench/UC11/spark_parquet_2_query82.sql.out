@@ -1,0 +1,11 @@
+spark.executor.memory	2048m
+spark.executor.instances	12
+spark.driver.memory	2048m
+spark.eventLog.enabled	false
+spark.serializer	org.apache.spark.serializer.KryoSerializer
+spark.kryo.classesToRegister	org.apache.hadoop.hive.ql.io.HiveKey,org.apache.hadoop.io.BytesWritable,org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch
+spark.driver.extraJavaOptions	-Xss8m
+spark.executor.extraJavaOptions	-Xss8m
+AAAAAAAAAEOFAAAA	Attacks may select therefore alone certain bishops. Members should invite suspiciously deals; correct, responsible states mig	41.64
+AAAAAAAADAOFAAAA	Early points give so social, secondary clouds. Sorry years provide. Scientific affairs might not dispense corporate, dead teams. German functions will encoura	57.4
+AAAAAAAAGKPAAAAA	Central, long members must swallow also women. Federal, major benefi	58.0

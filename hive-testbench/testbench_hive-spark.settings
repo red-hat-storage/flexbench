@@ -49,12 +49,13 @@ set hive.vectorized.groupby.maxentries=1024;
 -- These values need to be tuned appropriately to your cluster. These examples are for reference.
 -- set hive.tez.container.size=4096;
 -- set hive.tez.java.opts=-Xmx3800m;
--- set hive.auto.convert.join.noconditionaltask.size=320000000;
+set hive.auto.convert.join.noconditionaltask.size=320000000;
 
 set hive.execution.engine=spark;
-set spark.executor.memory=2048m;
-set spark.executor.instances=12;
-set spark.driver.memory=2048m;
+set spark.executor.memory=16g;
+set spark.executor.instances=3;
+set spark.executor.cores=7;
+set spark.driver.memory=3g;
 set spark.master=yarn-cluster;
 set spark.eventLog.enabled=false;
 set spark.serializer=org.apache.spark.serializer.KryoSerializer;

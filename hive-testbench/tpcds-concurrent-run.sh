@@ -4,7 +4,7 @@ QUERY_DIR=$1
 CONCURRENCY=$2
 
 
-for scale in 2 3 4 
+for scale in 1000 10000 100000 
 do
    for engine_format in "presto orc" "spark parquet" "hive orc" "hive-spark orc" 
    do
