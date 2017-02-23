@@ -14,6 +14,7 @@ records_per_mapper=10M
 log4j=log4j.properties
 startdate=2017-02-21
 days=1
+parallel=10
 
 usage()
 {
@@ -25,6 +26,7 @@ usage()
   log "  -o|--output Output path."
   log "  -sd|--startdate Starting date in ISO format, default 2017-02-21"
   log "  -d|--days number of days to generate for (each is a seperate mr job), default 1"
+  log "  -p|--parallel number of days to run in parallel, default 10"
   exit 1
 }
 
@@ -67,6 +69,12 @@ case $i in
       log "Number of days must be a number" && usage
     fi
     ;;
+    -p=*|--parallel=*)
+    parallel="${i#*=}"
+    if [[ ! $parallel =~ ^[1-9][0-9]*$ ]]; then
+      log "Days to run in parallel must be a number" && usage
+    fi
+    ;;
     *)
     log "Invalid argument $i" && usage
     ;;
@@ -87,6 +95,7 @@ log records_per_mapper="$records_per_mapper"
 log output="$output"
 log startdate="$startdate"
 log days="$days"
+log parallel="$parallel"
 
 
 hadoop_cmd="$HADOOP_HOME/bin/hadoop"
@@ -108,6 +117,10 @@ done
 
 date=$startdate
 for i in $(seq 1 $days); do
+  if (( i % $parallel == 0 )); then
+    log "Waiting for $parallel jobs to finish"
+    wait
+  fi
   log "---"
   log "Building job for date $date"
   #make synth json file for date
@@ -132,7 +145,10 @@ EOF
 
   log "Running command:" "${command[@]}"
   log "Output will be logged to $logfile"
-  nohup "${command[@]}" &> "$logfile" &
+  "${command[@]}" &> "$logfile" &
 
   date=$(date -I -d "$date + 1 day")
 done
+
+log "Waiting remaining jobs to finish"
+wait
