@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use File::Basename;
 use POSIX qw/strftime/;
+use IO::Handle;
 
 # PROTOTYPES
 sub dieWithUsage(;$);
@@ -26,6 +27,9 @@ dieWithUsage("suite name required") unless $format eq "orc" or $format eq "parqu
 
 chdir $SCRIPT_PATH;
 chdir $query_dir;
+
+my $filename = "tpc_stats_${run_id}.log";
+open(my $fh, '>>', $filename) or die "Could not open file '$filename' $!";
 
 #my @queries = glob '*.sql';
 my @queries = split(/\s/, `cat run_order_${run_id}.txt`);
@@ -54,24 +58,25 @@ for my $query ( @queries ) {
                 my $output = '';
 	        foreach my $line ( @hiveoutput ) {
 		        if( $line =~ /Time taken:\s+([\d\.]+)\s+seconds,\s+Fetched:*\s+(\d+)\s+row/ ) {
-			        $output = "$logname,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$1,$2\n"; 
+			        $output = "$query_dir,$run_id,$engine,$format,$scale,$query,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$1,$2\n"; 
 		        } # end if
 	        } # end while
 	        if ( $output eq '' ) {
-		        $output = "$logname,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n"; 
+		        $output = "$query_dir,$run_id,$engine,$format,$scale,$query,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n"; 
                 }
-	        print $output;
+	        print $fh $output;
         } else {
                 my $rows = `wc -l $logname.out`;
                 my @row = split(/\s/, $rows);
                 if (not(@hiveoutput)) {
-                        print "$logname,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$hiveTime,$row[0]\n";
+                        print $fh "$query_dir,$run_id,$engine,$format,$scale,$query,success,$hiveStartFmt,$hiveEndFmt,$hiveTime,$hiveTime,$row[0]\n";
                 } else {
-                        print "$logname,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n";
+                        print $fh "$query_dir,$run_id,$engine,$format,$scale,$query,failed,$hiveStartFmt,$hiveEndFmt,$hiveTime,,\n";
                 }
         }
+        $fh->flush();
 } # end for
-
+close $fh;
 
 sub dieWithUsage(;$) {
 	my $err = shift || '';

@@ -3,7 +3,7 @@
 QUERY_DIR=$1
 CONCURRENCY=$2
 
-echo "filename,status,start,end,tot_time,query_time,rows"
+echo "query_set,run_id,engine,format,scale_factor,query,status,start,end,tot_time,query_time,rows" > $1/tpc_stats_$2.log
 
 for scale in 2 3 4 
 do
