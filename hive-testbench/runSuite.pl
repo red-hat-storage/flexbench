@@ -27,7 +27,8 @@ dieWithUsage("suite name required") unless $format eq "orc" or $format eq "parqu
 chdir $SCRIPT_PATH;
 chdir $query_dir;
 
-my @queries = glob '*.sql';
+#my @queries = glob '*.sql';
+my @queries = split(/\s/, `cat run_order_${run_id}.txt`);
 
 my $db = "tpcds_bin_partitioned_${format}_$scale",
 print "filename,status,start,end,tot_time,query_time,rows\n";

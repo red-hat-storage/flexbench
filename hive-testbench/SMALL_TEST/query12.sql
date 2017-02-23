@@ -1,1 +1,1 @@
-select * from item limit 37;
+select * from customer limit 12;

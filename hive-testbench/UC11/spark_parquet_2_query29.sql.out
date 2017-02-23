@@ -1,9 +1,0 @@
-spark.executor.memory	2048m
-spark.executor.instances	12
-spark.driver.memory	2048m
-spark.eventLog.enabled	false
-spark.serializer	org.apache.spark.serializer.KryoSerializer
-spark.kryo.classesToRegister	org.apache.hadoop.hive.ql.io.HiveKey,org.apache.hadoop.io.BytesWritable,org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch
-spark.driver.extraJavaOptions	-Xss8m
-spark.executor.extraJavaOptions	-Xss8m
-AAAAAAAAJDGEAAAA	Almost senior numbers must pay sure, human taxes. Ideas use; flexi	AAAAAAAAOAAAAAAA	ese	89	89	87
