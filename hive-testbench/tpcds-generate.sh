@@ -1,13 +1,15 @@
 #!/bin/bash
 
+TEXT_DIR=/tmp/tpc
+
 #generate 1TB tables for orc and parquet
-./tpcds-setup.sh 1000 orc /tmp/orc_1000
-./tpcds-setup.sh 1000 parquet /tmp/parquet_1000
+./tpcds-setup.sh 1000 orc $TEXT_DIR
+./tpcds-setup.sh 1000 parquet $TEXT_DIR
 
 #generate 10TB tables for orc and parquet
-./tpcds-setup.sh 10000 orc /tmp/orc_10000
-./tpcds-setup.sh 10000 parquet /tmp/parquet_10000
+./tpcds-setup.sh 10000 orc $TEXT_DIR
+./tpcds-setup.sh 10000 parquet $TEXT_DIR
 
 #generate 100TB tables for orc and parquet
-./tpcds-setup.sh 100000 orc /tmp/orc_100000
-./tpcds-setup.sh 100000 parquet /tmp/parquet_100000
+./tpcds-setup.sh 100000 orc $TEXT_DIR
+./tpcds-setup.sh 100000 parquet $TEXT_DIR
