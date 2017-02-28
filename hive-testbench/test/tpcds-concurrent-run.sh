@@ -19,3 +19,5 @@ do
       wait
    done
 done
+
+cp $1/tpc_stats_$x.log $1/tpc_stats_$x.log.`date "+%F-%T"`

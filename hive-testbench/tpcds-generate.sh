@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEXT_DIR=/tmp/tpc
+TEXT_DIR=s3a://tpc
 
 #generate 1TB tables for orc and parquet
 ./tpcds-setup.sh 1000 orc $TEXT_DIR

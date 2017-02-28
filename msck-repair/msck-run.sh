@@ -2,5 +2,6 @@
 
 DATABASE=$1
 SIZE=$2
+LOCATION=s3a://tmp/msck/$DATABASE/$SIZE/msck
 
-hive -hiveconf location="hdfs://nameservice1/user/hive/warehouse/tpcds_bin_partitioned_orc_2.db/msckrepair" -hiveconf size=$SIZE --database $DATABASE -f msck.sql
+hive -hiveconf location="$LOCATION" -hiveconf size=$SIZE --database $DATABASE -f msck.sql > msck_stats_$SIZE.log.`date "+%F-%T"`

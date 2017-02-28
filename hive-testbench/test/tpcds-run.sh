@@ -22,3 +22,5 @@ perl runSuite.pl $QUERY_DIR $run_id presto orc 4
 perl runSuite.pl $QUERY_DIR $run_id spark parquet 4
 perl runSuite.pl $QUERY_DIR $run_id hive orc 4
 perl runSuite.pl $QUERY_DIR $run_id hive-spark orc 4
+
+cp $1/tpc_stats_${run_id}.log $1/tpc_stats_${run_id}.log.`date "+%F-%T"`

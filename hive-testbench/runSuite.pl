@@ -12,8 +12,7 @@ sub dieWithUsage(;$);
 # GLOBALS
 my $SCRIPT_NAME = basename( __FILE__ );
 my $SCRIPT_PATH = dirname( __FILE__ );
-my $PRESTO_SERVER = "ip-172-31-22-200.us-west-2.compute.internal:8500";
-my $PRESTO_EXECUTABLE = "/home/ubuntu/presto-cli/presto-cli-0.152-executable.jar";
+my $PRESTO_SERVER = "localhost:8500";
 
 # MAIN
 dieWithUsage("one or more parameters not defined") unless @ARGV >= 4;
@@ -41,8 +40,8 @@ for my $query ( @queries ) {
         my $cmd = {
                 'hive' => "echo 'use $db; source $query;' | hive -i ../testbench.settings 2>&1  | tee $logname.log",
                 'hive-spark' => "echo 'use $db; source $query;' | hive -i ../testbench_hive-spark.settings 2>&1  | tee $logname.log",
-                'spark' => "/data1/spark-2.1.0-bin-hadoop2.7/bin/spark-sql --master=yarn --database $db -f $query -i ../testbench_spark.settings 2>&1 1>$logname.out | tee $logname.log",
-	        'presto' => "$PRESTO_EXECUTABLE --server $PRESTO_SERVER --catalog hive --schema $db --file $query 2>&1 1>$logname.out | tee $logname.log"
+                'spark' => "spark-sql --master=yarn --database $db -f $query -i ../testbench_spark.settings 2>&1 1>$logname.out | tee $logname.log",
+	        'presto' => "presto --server $PRESTO_SERVER --catalog hive --schema $db --file $query 2>&1 1>$logname.out | tee $logname.log"
         };
 
 	my $hiveStart = time();
