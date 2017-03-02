@@ -51,7 +51,16 @@ set hive.vectorized.groupby.maxentries=1024;
 -- set hive.tez.java.opts=-Xmx3800m;
 -- set hive.auto.convert.join.noconditionaltask.size=320000000;
 
--- set hive.execution.engine=tez;
+set hive.execution.engine=spark;
+set spark.executor.memory=2048m;
+set spark.executor.instances=12;
+set spark.driver.memory=2048m;
+set spark.master=yarn-cluster;
+set spark.eventLog.enabled=false;
+set spark.serializer=org.apache.spark.serializer.KryoSerializer;
+set spark.kryo.classesToRegister=org.apache.hadoop.hive.ql.io.HiveKey,org.apache.hadoop.io.BytesWritable,org.apache.hadoop.hive.ql.exec.vector.VectorizedRowBatch;
+set spark.driver.extraJavaOptions=-Xss8m;
+set spark.executor.extraJavaOptions=-Xss8m;
 set hive.default.fileformat=orc;
 set hive.cbo.enable=true;
 set hive.stats.fetch.column.stats=true;
