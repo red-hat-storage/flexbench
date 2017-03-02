@@ -117,10 +117,6 @@ done
 
 date=$startdate
 for i in $(seq 1 $days); do
-  if (( i % $parallel == 0 )); then
-    log "Waiting for $parallel jobs to finish"
-    wait
-  fi
   log "---"
   log "Building job for date $date"
   #make synth json file for date
@@ -146,6 +142,11 @@ EOF
   log "Running command:" "${command[@]}"
   log "Output will be logged to $logfile"
   "${command[@]}" &> "$logfile" &
+
+  if (( i % $parallel == 0 )); then
+    log "Waiting for $parallel jobs to finish"
+    wait
+  fi
 
   date=$(date -I -d "$date + 1 day")
 done
