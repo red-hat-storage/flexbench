@@ -4,7 +4,7 @@ This module tests streaming ingest of log structured data in the same format as 
 
 ##How to Use
 
-Prerequisites: Kafka and Zookeeper (assumed to both be on local host for instructions but they can be external and/or have multiple hosts)
+Prerequisites: Kafka 0.8.2.x and Zookeeper (assumed to both be on local host for instructions but they can be external and/or have multiple hosts).
 
 ### Get Secor
 Clone [Secor](https://github.com/pinterest/secor), build, and install
