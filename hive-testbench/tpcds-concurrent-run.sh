@@ -9,9 +9,11 @@ do
 done
 
 
-for scale in 1000 10000 100000 
+#for scale in 1000 10000 100000 
+for scale in 1000 10000 
 do
-   for engine_format in "presto orc" "spark parquet" "hive orc" "hive-spark orc" 
+   #for engine_format in "presto orc" "spark parquet" "hive orc" "hive-spark orc" 
+   for engine_format in "spark parquet" "presto orc"   
    do
       for x in `seq 1 $CONCURRENCY`
       do
