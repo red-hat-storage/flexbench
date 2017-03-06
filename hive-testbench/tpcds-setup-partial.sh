@@ -29,6 +29,7 @@ DIMS="date_dim time_dim item customer customer_demographics household_demographi
 #FACTS="store_returns web_sales web_returns catalog_sales catalog_returns inventory"
 #FACTS="web_returns catalog_returns inventory"
 FACTS="store_sales"
+#FACTS="catalog_returns web_returns web_sales catalog_sales store_returns inventory"
 
 # Get the parameters.
 SCALE=$1
@@ -122,6 +123,6 @@ do
 	i=`expr $i + 1`
 done
 
-make -j 2 -f $LOAD_FILE
+make -j 1 -f $LOAD_FILE
 
 echo "Data loaded into database ${DATABASE}."
