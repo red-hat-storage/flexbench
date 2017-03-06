@@ -51,7 +51,7 @@ Hive DDL for this table is in `create_table.sql` it has two variables -- the tab
 
 ```
 hive -f create_table.sql \
---hivevar table=rog.log-sf10k-100tb \
+--hivevar table=rog.log_sf10k_100tb \
 --hivevar location=s3a://mybucket/log-sf10k \
 ```
 
@@ -63,10 +63,10 @@ The enrichment query joins the log data to TPC-DS tables to add additional data.
 
 ```
 hive -f enrichment.sql \
---hivevar output_table=rog.log-sf10k-100tb-enriched \
+--hivevar output_table=rog.log_sf10k_100tb_enriched \
 --hivevar format=ORC \
---hivevar log_table=rog.log-sf10k-100tb \
---hivevar tpcdsdb=tpcds-sf10k-orc \
+--hivevar log_table=rog.log_sf10k_100tb \
+--hivevar tpcdsdb=tpcds_sf10k_orc \
 --hivevar start_date=2014-02-21 \
 --hivevar end_date=2016-11-16
 ```
