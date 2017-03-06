@@ -1,5 +1,7 @@
-set spark.executor.memory=2048m;
-set spark.executor.instances=12;
-set spark.driver.memory=2048m;
-set spark.driver.extraJavaOptions=-Xss8m;
-set spark.executor.extraJavaOptions=-Xss8m;
+spark.executor.memory=54G
+spark.executor.instances=48
+spark.driver.memory=8G
+spark.executor.cores=23
+spark.driver.extraJavaOptions=-Xss8m
+spark.executor.extraJavaOptions=-Xss8m
+spark.hadoop.yarn.timeline-service.enabled=false
