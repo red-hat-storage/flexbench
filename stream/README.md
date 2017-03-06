@@ -64,7 +64,7 @@ kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --top
 Secor creates files under the path `s3a://${secor.s3.bucket}/${secor.s3.path}/${TOPIC}/offset=*/`. We can create a partitioned hive table refering to this data as below, setting appropriate name and location (w/o `/offset=*` suffex)
 ```
 hive -f create_table.sql \
---hivevar table=stream.log-sf10k \
+--hivevar table=stream.log_sf10k \
 --hivevar location=s3a://mybucket/stream-log-sf10k \
 ```
 
@@ -72,9 +72,9 @@ hive -f create_table.sql \
 For UC5 we run this query concurrently with streaming ingestion. Note this query appends to the output table so it should be run on non overlapping offset partition ranges or there will be duplicate data in the output table. The value of `end_offset_partition` should be less than the partition currently being written to by Secor.
 ```
 hive -f compaction.sql \
---hivevar output_table=stream.log-sf10k-compacted \
+--hivevar output_table=stream.log_sf10k_compacted \
 --hivevar format=ORC \
---hivevar stream_table=stream.log-sf10k \
+--hivevar stream_table=stream.log_sf10k \
 --hivevar start_offset_partition=0 \
 --hivevar end_offset_partition=1000000000
 ```
