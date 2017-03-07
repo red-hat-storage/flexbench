@@ -1,0 +1,11 @@
+[
+   {"name":"kafkapartition", "class":"int"},
+   {"name":"item", "class":"foreign-key", "size":402000, "skew":1},
+   {"name":"cust", "class":"int", "min":1, "max":65000000, "skew":1},
+   {"name":"os", "class":"os"},
+   {"name":"br", "class":"browser"},
+   {"name":"ip1", "class":"int", "min":1, "max":254},
+   {"name":"ip2", "class":"int", "min":1, "max":254},
+   {"name":"ip3", "class":"int", "min":1, "max":254},
+   {"name":"ip4", "class":"int", "min":1, "max":254}
+]
