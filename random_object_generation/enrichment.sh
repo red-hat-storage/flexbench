@@ -11,6 +11,12 @@ ENGINE="spark"
 
 START_TIME="$(date +%s)"
 
+# if [ "${ENGINE}" == "hive" ]; then
+    # hive -e "DROP TABLE IF EXISTS rog.log_sf10k_10tb_hive_enriched;"
+# elif [ "${ENGINE}" == "spark" ]; then
+    # hive -e "DROP TABLE IF EXISTS rog.log_sf10k_10tb_spark_enriched;"
+# fi
+
 for RUN in `seq 1 ${RUNS}`; do
     END_DATE=$(date +%Y-%m-%d -d "${START_DATE} + $(( ${DAYS} - 1 )) day")
     echo "Loop ${RUN} - ${START_DATE} to ${END_DATE}"
@@ -39,9 +45,9 @@ for RUN in `seq 1 ${RUNS}`; do
         --hivevar end_date=${END_DATE}
         hive -e "MSCK REPAIR TABLE rog.log_sf10k_10tb_spark_enriched;"
     fi
+    echo ""
 
     START_DATE=$(date +%Y-%m-%d -d "${START_DATE} + ${DAYS} day")
-    echo ""
 done
 
 TOTAL_RUN_TIME=$(($(date +%s) - ${START_TIME}))
