@@ -8,10 +8,9 @@ SET hive.exec.dynamic.partition.mode=nonstrict;
 -- set hivevar:end_date=2017-02-23;
  
 -- testing only
--- drop table ${output_table};
+-- drop table if exists ${output_table};
 
-
-CREATE TABLE IF NOT EXISTS ${output_table}(
+CREATE TABLE IF NOT EXISTS ${output_table} (
   ip STRING,
   ts STRING,
   tz STRING,
