@@ -16,6 +16,10 @@ set hive.enforce.bucketing=true;
 set hive.enforce.sorting=true;
 set hive.enforce.sortmergebucketmapjoin=true;
 
+set fs.s3a.fast.upload=true;
+-- set hive.warehouse.subdir.inherit.perms=false;
+-- set hive.metastore.pre.event.listeners=0;
+
 set hive.limit.pushdown.memory.usage=0.04;
 set hive.map.aggr=true;
 set hive.mapjoin.bucket.cache.size=10000;

@@ -77,9 +77,12 @@ if [ $? -ne 0 ]; then
 fi
 echo "TPC-DS text data generation complete."
 
+SOURCE_DB="tpcds_text_${SCALE}_concurrent"
+
 # Create the text/flat tables as external tables. These will be later be converted to ORCFile.
 echo "Loading text data into external tables."
-runcommand "hive -i settings/load-flat.sql -f ddl-tpcds/text/alltables.sql -d DB=tpcds_text_${SCALE} -d LOCATION=${DIR}/${SCALE}"
+# runcommand "hive -i settings/load-flat.sql -f ddl-tpcds/text/alltables.sql -d DB=${SOURCE_DB} -d LOCATION=${DIR}/${SCALE}"
+runcommand "spark-sql --master=yarn --hivevar DB=${SOURCE_DB} --hivevar LOCATION=${DIR}/${SCALE} -f ddl-tpcds/text/alltables.sql --properties-file settings/load-flat.sql"
 
 # Create the partitioned and bucketed tables.
 
@@ -94,13 +97,13 @@ echo -e "all: ${DIMS} ${FACTS}" > $LOAD_FILE
 
 i=1
 total=24
-DATABASE=tpcds_bin_partitioned_${FORMAT}_${SCALE}
+DATABASE=tpcds_bin_partitioned_${FORMAT}_${SCALE}_concurrent
 
 # Populate the smaller tables.
 for t in ${DIMS}
 do
 	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
-	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} -d SOURCE=tpcds_text_${SCALE} \
+	    -d DB=${DATABASE} -d SOURCE=${SOURCE_DB} \
             -d SCALE=${SCALE} \
 	    -d FILE=${FORMAT}"
 	echo -e "${t}:\n\t@$COMMAND $SILENCE && echo 'Optimizing table $t ($i/$total).'" >> $LOAD_FILE
@@ -110,9 +113,9 @@ done
 for t in ${FACTS}
 do
 	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
-	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} \
+	    -d DB=${DATABASE} \
             -d SCALE=${SCALE} \
-	    -d SOURCE=tpcds_text_${SCALE} -d BUCKETS=${BUCKETS} \
+	    -d SOURCE=${SOURCE_DB} -d BUCKETS=${BUCKETS} \
 	    -d RETURN_BUCKETS=${RETURN_BUCKETS} -d FILE=${FORMAT}"
 	echo -e "${t}:\n\t@$COMMAND $SILENCE && echo 'Optimizing table $t ($i/$total).'" >> $LOAD_FILE
 	i=`expr $i + 1`
@@ -121,3 +124,4 @@ done
 make -j 1 -f $LOAD_FILE
 
 echo "Data loaded into database ${DATABASE}."
+echo "Done!"

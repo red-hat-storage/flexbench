@@ -89,3 +89,4 @@ from
           (household_demographics.hd_dep_count = -1 and household_demographics.hd_vehicle_count<=-1+2))
      and store.s_store_name = 'ese') s8
 ;
+

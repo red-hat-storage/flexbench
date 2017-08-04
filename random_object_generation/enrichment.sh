@@ -1,49 +1,54 @@
 #!/usr/bin/env bash
 
-START_DATE="2014-02-21"
-DAYS=7
-RUNS=3
+# [ hive | spark-sql ]
+ENGINE="${1}"
 
-ENGINE="spark"
+# [ 10tb | 100tb ]
+LOG_DATA_SIZE="${2}"
+
+# Can be empty.
+OUTPUT_TABLE_SUFFIX="${3}"
 
 # Use "s3cmd ls s3://rog/log-sf1k-10tb/" to check for start and end dates.
 # 2014-02-21 2016-11-16
+START_DATE="2014-02-21"
+
+# Days per job.
+DAYS=7
+
+# Number of jobs.
+RUNS=3
 
 START_TIME="$(date +%s)"
-
-# if [ "${ENGINE}" == "hive" ]; then
-    # hive -e "DROP TABLE IF EXISTS rog.log_sf10k_10tb_hive_enriched;"
-# elif [ "${ENGINE}" == "spark" ]; then
-    # hive -e "DROP TABLE IF EXISTS rog.log_sf10k_10tb_spark_enriched;"
-# fi
 
 for RUN in `seq 1 ${RUNS}`; do
     END_DATE=$(date +%Y-%m-%d -d "${START_DATE} + $(( ${DAYS} - 1 )) day")
     echo "Loop ${RUN} - ${START_DATE} to ${END_DATE}"
+    echo ""
 
     if [ "${ENGINE}" == "hive" ]; then
         hive \
         -f enrichment.sql \
-        --hivevar tpcdsdb=tpcds_bin_partitioned_orc_10000 \
-        --hivevar log_table=rog.log_sf10k_10tb \
-        --hivevar output_table=rog.log_sf10k_10tb_hive_enriched \
+        --hivevar tpcdsdb=tpcds_bin_partitioned_orc_1000 \
+        --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
+        --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=ORC \
         --hivevar start_date=${START_DATE} \
         --hivevar end_date=${END_DATE}
-        hive -e "MSCK REPAIR TABLE rog.log_sf10k_10tb_hive_enriched;"
-    elif [ "${ENGINE}" == "spark" ]; then
+        hive -e "MSCK REPAIR TABLE rog.log_sf10k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX};"
+    elif [ "${ENGINE}" == "spark-sql" ]; then
         spark-sql \
         -f enrichment.sql \
         --master=yarn \
-        --properties-file ../hive-testbench/testbench_spark.settings \
+        --properties-file /hadoop/hive-testbench/testbench_spark.settings \
         --database rog \
-        --hivevar tpcdsdb=tpcds_bin_partitioned_parquet_10000 \
-        --hivevar log_table=rog.log_sf10k_10tb \
-        --hivevar output_table=rog.log_sf10k_10tb_spark_enriched \
+        --hivevar tpcdsdb=tpcds_bin_partitioned_parquet_1000 \
+        --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
+        --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=parquet \
         --hivevar start_date=${START_DATE} \
         --hivevar end_date=${END_DATE}
-        hive -e "MSCK REPAIR TABLE rog.log_sf10k_10tb_spark_enriched;"
+        hive -e "MSCK REPAIR TABLE rog.log_sf10k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX};"
     fi
     echo ""
 
