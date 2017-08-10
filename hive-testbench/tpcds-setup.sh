@@ -151,7 +151,14 @@ do
         i=`expr $i + 1`
 done
 
+START_TIME="$(date +%s)"
+
 make -j $PARALLEL_JOBS -f $LOAD_FILE
+
+TOTAL_RUN_TIME=$(($(date +%s) - ${START_TIME}))
+if [ ${TOTAL_RUN_TIME} -gt 1 ]; then
+    echo "Total run time ${TOTAL_RUN_TIME} seconds."
+fi
 
 echo "Data loaded into database ${DATABASE}."
 echo "Done!"
