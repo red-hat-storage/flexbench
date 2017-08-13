@@ -6,6 +6,12 @@ ENGINE="${1}"
 # [ 10tb | 100tb ]
 LOG_DATA_SIZE="${2}"
 
+if [ "${LOG_DATA_SIZE}" == "10tb" ]; then
+    TPC_DATA_SIZE="1000"
+elif [ "${LOG_DATA_SIZE}" == "100tb" ]; then
+    TPC_DATA_SIZE="10000"
+fi
+
 # Can be empty.
 OUTPUT_TABLE_SUFFIX="${3}"
 
@@ -29,7 +35,7 @@ for RUN in `seq 1 ${RUNS}`; do
     if [ "${ENGINE}" == "hive" ]; then
         hive \
         -f enrichment.sql \
-        --hivevar tpcdsdb=tpcds_bin_partitioned_orc_1000 \
+        --hivevar tpcdsdb=tpcds_bin_partitioned_orc_${TPC_DATA_SIZE} \
         --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
         --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=ORC \
@@ -42,7 +48,7 @@ for RUN in `seq 1 ${RUNS}`; do
         --master=yarn \
         --properties-file /hadoop/hive-testbench/testbench_spark.settings \
         --database rog \
-        --hivevar tpcdsdb=tpcds_bin_partitioned_parquet_1000 \
+        --hivevar tpcdsdb=tpcds_bin_partitioned_parquet_${TPC_DATA_SIZE} \
         --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
         --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=parquet \
