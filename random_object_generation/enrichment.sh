@@ -36,12 +36,12 @@ for RUN in `seq 1 ${RUNS}`; do
         hive \
         -f enrichment.sql \
         --hivevar tpcdsdb=tpcds_bin_partitioned_orc_${TPC_DATA_SIZE} \
-        --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
-        --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX} \
+        --hivevar log_table=rog.log_sf1k_${LOG_DATA_SIZE} \
+        --hivevar output_table=rog.log_sf1k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=ORC \
         --hivevar start_date=${START_DATE} \
         --hivevar end_date=${END_DATE}
-        hive -e "MSCK REPAIR TABLE rog.log_sf10k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX};"
+        hive -e "MSCK REPAIR TABLE rog.log_sf1k_${LOG_DATA_SIZE}_hive_enriched${OUTPUT_TABLE_SUFFIX};"
     elif [ "${ENGINE}" == "spark-sql" ]; then
         spark-sql \
         -f enrichment.sql \
@@ -49,12 +49,12 @@ for RUN in `seq 1 ${RUNS}`; do
         --properties-file /hadoop/hive-testbench/testbench_spark.settings \
         --database rog \
         --hivevar tpcdsdb=tpcds_bin_partitioned_parquet_${TPC_DATA_SIZE} \
-        --hivevar log_table=rog.log_sf10k_${LOG_DATA_SIZE} \
-        --hivevar output_table=rog.log_sf10k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX} \
+        --hivevar log_table=rog.log_sf1k_${LOG_DATA_SIZE} \
+        --hivevar output_table=rog.log_sf1k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX} \
         --hivevar format=parquet \
         --hivevar start_date=${START_DATE} \
         --hivevar end_date=${END_DATE}
-        hive -e "MSCK REPAIR TABLE rog.log_sf10k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX};"
+        hive -e "MSCK REPAIR TABLE rog.log_sf1k_${LOG_DATA_SIZE}_spark_enriched${OUTPUT_TABLE_SUFFIX};"
     fi
     echo ""
 
