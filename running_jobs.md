@@ -57,3 +57,29 @@ random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <op
 
 Using nohup, the output of the calls will be in nohup.out. You can find the timings in this file. Look for "^Time".
 
+# ETL test
+
+Generate 17 dim and 7 fact tables in parallel.  
+
+hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a work directory>  
+
+`nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl2/tpcds-1k-parallel-test &`
+`nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl2/tpcds-10k-parallel-test &`
+
+# UC11 concurrent test
+
+Run N number of TPCDS queries in parallel.  
+
+hive-testbench/tpcds-concurrent-run.sh <queries directory> <scale factor> <parallel jobs>  
+
+`nohup ./tpcds-concurrent-run.sh UC11 1000 10 &`
+`nohup ./tpcds-concurrent-run.sh UC11 10000 10 &`
+
+# Mega concurrent test
+
+* UC11 concurrent test with 10 threads.
+* ETL test with 24 tables in parallel.
+* UC2/3 enrichment test using spark.
+
+`big_concurrent_tests/mega_concurrent.sh`
+
