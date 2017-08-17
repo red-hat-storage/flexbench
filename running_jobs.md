@@ -47,13 +47,13 @@ random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <op
 
 #### _1tb tpc_ data against _10tb log_ data
 
-`nohup ./enrichment.sh spark-sql 10tb "" &`
-`nohup ./enrichment.sh hive 10tb "" &`
+`nohup ./enrichment.sh spark-sql 10tb "" &`  
+`nohup ./enrichment.sh hive 10tb "" &`  
 
 #### _10tb tpc_ data against _100tb log_ data
 
-`nohup ./enrichment.sh spark-sql 100tb "" &`
-`nohup ./enrichment.sh hive 100tb "" &`
+`nohup ./enrichment.sh spark-sql 100tb "" &`  
+`nohup ./enrichment.sh hive 100tb "" &`  
 
 Using nohup, the output of the calls will be in nohup.out. You can find the timings in this file. Look for "^Time".
 
@@ -63,8 +63,8 @@ Generate 17 dim and 7 fact tables in parallel.
 
 hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a work directory>  
 
-`nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl2/tpcds-1k-parallel-test &`
-`nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl2/tpcds-10k-parallel-test &`
+`nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl2/tpcds-1k-parallel-test &`  
+`nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl2/tpcds-10k-parallel-test &`  
 
 # UC11 concurrent test
 
@@ -72,8 +72,8 @@ Run N number of TPCDS queries in parallel.
 
 hive-testbench/tpcds-concurrent-run.sh <queries directory> <scale factor> <parallel jobs>  
 
-`nohup ./tpcds-concurrent-run.sh UC11 1000 10 &`
-`nohup ./tpcds-concurrent-run.sh UC11 10000 10 &`
+`nohup ./tpcds-concurrent-run.sh UC11 1000 10 &`  
+`nohup ./tpcds-concurrent-run.sh UC11 10000 10 &`  
 
 # Mega concurrent test
 
