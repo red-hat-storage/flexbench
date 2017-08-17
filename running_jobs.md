@@ -13,12 +13,15 @@ Using random_object_generation/generate.sh:
 each day is a partition containing 10 files  
 each file of 1GB size  
 located in Ceph at /rog/log-sf1k-10tb  
+
 `random_object_generation/generate.sh -sf=1k -m=10 -c=10M -o=s3a://rog/log-sf1k-10tb -sd=2014-02-21 -d=1000 -p=10`
 
 To double-check log generation results:  
+
 `~/s3cmd/s3cmd ls s3://rog/log-sf1k-10tb/`
 
 To create external Hive table:  
+
 `hive -f create_table.sql --hivevar table=rog.log_sf1k_10tb --hivevar location=s3a://rog/log-sf1k-10tb`
 
 #### For 100tb log dataset:
@@ -27,12 +30,15 @@ To create external Hive table:
 each day is a partition containing 10 files  
 each file of 10GB size  
 located in Ceph at /rog/log-sf1k-100tb  
+
 `random_object_generation/generate.sh -sf=1k -m=10 -c=100M -o=s3a://rog/log-sf1k-100tb -sd=2014-02-21 -d=1000 -p=10`
 
 To double-check log generation results:  
+
 `~/s3cmd/s3cmd ls s3://rog/log-sf1k-100tb/`
 
 To create external Hive table:  
+
 `hive -f create_table.sql --hivevar table=rog.log_sf1k_100tb --hivevar location=s3a://rog/log-sf1k-100tb`
 
 # UC2/3 enrichment test
@@ -40,10 +46,12 @@ To create external Hive table:
 random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <optional suffix output directory name>  
 
 #### _1tb tpc_ data against _10tb log_ data
+
 `nohup ./enrichment.sh spark-sql 10tb "" &`
 `nohup ./enrichment.sh hive 10tb "" &`
 
 #### _10tb tpc_ data against _100tb log_ data
+
 `nohup ./enrichment.sh spark-sql 100tb "" &`
 `nohup ./enrichment.sh hive 100tb "" &`
 
