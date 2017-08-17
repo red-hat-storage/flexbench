@@ -153,3 +153,5 @@ done
 
 log "Waiting remaining jobs to finish"
 wait
+
+echo "Done!"
