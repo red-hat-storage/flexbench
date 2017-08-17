@@ -55,7 +55,7 @@ To create external Hive table:
 `nohup ./enrichment.sh spark-sql 100tb "" &`  
 `nohup ./enrichment.sh hive 100tb "" &`  
 
-Timings will be in nohup.out. Look for "^Time". There will be timings for each stage of the enrichment test. For example, if using YARN, there will be the resource check wait time, then create table and finally the enrichment query. If using Hive, there will be timings for the individual MR stage jobs.
+Timings will be in nohup.out. Look for "^Time". There will be timings for each stage of the enrichment test. For example, if using YARN, there will be the resource check wait time, then create table query and finally the enrichment query. If using Hive, there will be timings for the individual MR stage jobs.
 
 # ETL test
 
