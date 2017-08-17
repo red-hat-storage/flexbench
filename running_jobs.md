@@ -43,7 +43,7 @@ To create external Hive table:
 
 # UC2/3 enrichment test
 
-random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <optional suffix output directory name>  
+`random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <optional suffix output directory name>`  
 
 #### _1tb tpc_ data against _10tb log_ data
 
@@ -61,7 +61,7 @@ Using nohup, the output of the calls will be in nohup.out. You can find the timi
 
 Generate 17 dim and 7 fact tables in parallel.  
 
-hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a work directory>  
+`hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a work directory>`  
 
 `nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl2/tpcds-1k-parallel-test &`  
 `nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl2/tpcds-10k-parallel-test &`  
@@ -70,7 +70,7 @@ hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <
 
 Run N number of TPCDS queries in parallel.  
 
-hive-testbench/tpcds-concurrent-run.sh <queries directory> <scale factor> <parallel jobs>  
+`hive-testbench/tpcds-concurrent-run.sh <queries directory> <scale factor> <parallel jobs>`  
 
 `nohup ./tpcds-concurrent-run.sh UC11 1000 10 &`  
 `nohup ./tpcds-concurrent-run.sh UC11 10000 10 &`  
