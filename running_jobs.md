@@ -7,7 +7,7 @@ Using random_object_generation/generate.sh:
   * -d 1000 - number of days (partitions)
   * -p 10 - number of threads, each running -m number of mappers.
 
-### For 10tb log dataset:
+#### For 10tb log dataset:
 
 1000 days of log data, each day is a partition containing 10 files, each file of 1GB size, located in Ceph at /rog/log-sf1k-10tb:  
 `random_object_generation/generate.sh -sf=1k -m=10 -c=10M -o=s3a://rog/log-sf1k-10tb -sd=2014-02-21 -d=1000 -p=10`
@@ -18,7 +18,7 @@ To double-check log generation results:
 To create external Hive table:  
 `hive -f create_table.sql --hivevar table=rog.log_sf1k_10tb --hivevar location=s3a://rog/log-sf1k-10tb`
 
-### For 100tb log dataset:
+#### For 100tb log dataset:
 
 1000 days of log data, each day is a partition containing 10 files, each file of 10GB size, located in Ceph at /rog/log-sf1k-100tb:  
 `random_object_generation/generate.sh -sf=1k -m=10 -c=100M -o=s3a://rog/log-sf1k-100tb -sd=2014-02-21 -d=1000 -p=10`
@@ -33,11 +33,11 @@ To create external Hive table:
 
 random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <optional suffix output directory name>  
 
-### The following calls will run 1tb tpc data against 10tb of log data:  
+#### The following calls will run _1tb tpc_ data against _10tb log_ data:  
 `nohup ./enrichment.sh spark-sql 10tb "" &`
 `nohup ./enrichment.sh hive 10tb "" &`
 
-### The following calls will run 10tb tpc data against 100tb of log data:  
+#### The following calls will run _10tb tpc_ data against _100tb log_ data:  
 `nohup ./enrichment.sh spark-sql 100tb "" &`
 `nohup ./enrichment.sh hive 100tb "" &`
 
