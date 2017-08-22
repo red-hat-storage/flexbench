@@ -55,7 +55,7 @@ To create external Hive table:
 `nohup ./enrichment.sh spark-sql 100tb "" &`  
 `nohup ./enrichment.sh hive 100tb "" &`  
 
-Using nohup, the output of the calls will be in nohup.out. You can find the timings in this file. Look for "^Time".
+Timings will be in nohup.out. Look for "^Time". There will be timings for each stage of the enrichment test. For example, if using YARN, there will be the resource check wait time, then create table query and finally the enrichment query. If using Hive, there will be timings for the individual MR stage jobs.
 
 # ETL test
 
@@ -66,6 +66,8 @@ Generate 17 dim and 7 fact tables in parallel.
 `nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl2/tpcds-1k-parallel-test &`  
 `nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl2/tpcds-10k-parallel-test &`  
 
+Timings will be in nohup.out. The total run time will be near the end of the file.
+
 # UC11 concurrent test
 
 Run N number of TPCDS queries in parallel.  
@@ -75,6 +77,8 @@ Run N number of TPCDS queries in parallel.
 `nohup ./tpcds-concurrent-run.sh UC11 1000 10 &`  
 `nohup ./tpcds-concurrent-run.sh UC11 10000 10 &`  
 
+Look for timing information in the UC11 (queries directory). The files will be tpc\_stats\_\*.log. They are csv formatted.
+
 # Mega concurrent test
 
 * UC11 concurrent test with 10 threads.
@@ -82,4 +86,6 @@ Run N number of TPCDS queries in parallel.
 * UC2/3 enrichment test using spark.
 
 `big_concurrent_tests/mega_concurrent.sh`
+
+See individual test sections above for timing information.
 
