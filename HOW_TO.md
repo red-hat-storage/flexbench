@@ -1,3 +1,14 @@
+# TPC dataset generation
+
+`hive-testbench/tpcds-setup.sh <parallel_jobs> <scale_factor> text <s3 text directory>`  
+
+#### Generate text dataset
+
+`hive-testbench/tpcds-setup.sh 1 1000 text s3a://tpc-1000-text`  
+This will create s3a://tpc-1000-text.  
+`hive-testbench/tpcds-setup.sh 1 10000 text s3a://tpc-10000-text`  
+This will create s3a://tpc-10000-text.  
+
 # Log data generation
 
 Using random_object_generation/generate.sh:
@@ -41,6 +52,28 @@ To create external Hive table:
 
 `hive -f create_table.sql --hivevar table=rog.log_sf1k_100tb --hivevar location=s3a://rog/log-sf1k-100tb`
 
+# ETL test
+
+Generate 17 dim and 7 fact tables in parallel.  
+
+`hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a text directory>`  
+
+#### Generate orc from text
+
+`hive-testbench/tpcds-setup.sh 17 1000 orc s3a://tpc-1000-text`  
+This will create s3a://tpc-1000-orc.  
+`hive-testbench/tpcds-setup.sh 17 10000 orc s3a://tpc-10000-text`  
+This will create s3a://tpc-10000-orc.  
+
+#### Generate parquet from text
+
+`hive-testbench/tpcds-setup.sh 17 1000 parquet s3a://tpc-1000-text`  
+This will create s3a://tpc-1000-parquet.  
+`hive-testbench/tpcds-setup.sh 17 10000 parquet s3a://tpc-10000-text`  
+This will create s3a://tpc-10000-parquet.  
+
+Timings will be in nohup.out. The total run time will be near the end of the file.
+
 # UC2/3 enrichment test
 
 `random_object_generation/enrichment.sh [ hive | spark-sql ] [ 10tb | 100tb ] <optional suffix output directory name>`  
@@ -56,17 +89,6 @@ To create external Hive table:
 `nohup ./enrichment.sh hive 100tb "" &`  
 
 Timings will be in nohup.out. Look for "^Time". There will be timings for each stage of the enrichment test. For example, if using YARN, there will be the resource check wait time, then create table query and finally the enrichment query. If using Hive, there will be timings for the individual MR stage jobs.
-
-# ETL test
-
-Generate 17 dim and 7 fact tables in parallel.  
-
-`hive-testbench/tpcds-setup.sh <parallel jobs> <scale factor> [ parquet | orc ] <s3a work directory>`  
-
-`nohup ./tpcds-setup.sh 24 1000 parquet s3a://etl/tpcds-1k-parallel-test &`  
-`nohup ./tpcds-setup.sh 24 10000 parquet s3a://etl/tpcds-1k-parallel-test &`  
-
-Timings will be in nohup.out. The total run time will be near the end of the file.
 
 # UC11 concurrent test
 
