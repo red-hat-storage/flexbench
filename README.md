@@ -2,8 +2,6 @@
 
 object-storage-benchmarking  
 
-# HOWTO
-
 Please see HOW\_TO.md for jobs. These job simulate a workflow:  
 
 * Data Ingestion jobs
