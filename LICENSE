@@ -1,0 +1,41 @@
+# License Details
+
+All code usage in this repository is goverened by included is goverend by Exhibit A, Section 3.1.2 of the Statement of Work dated January 23, 2017 between Silicon Valley Data Science LLC and Red Hat, Inc.
+
+## Used Components and Licenses
+Additional open source components that may be included in this respository include the following.
+
+### Apache Hadoop
+- Code location: https://github.com/apache/hadoop
+- License Type: Apache License 2.0
+- License Text: https://github.com/apache/hadoop/blob/trunk/LICENSE.txt
+
+### Apache Hive
+- Code location: https://github.com/apache/hive
+- License Type: Apache License 2.0
+- License Text: https://github.com/apache/hive/blob/master/LICENSE
+
+### Presto
+- Code location: https://github.com/prestodb/presto/
+- License Type: Apache License 2.0
+- License Text: https://github.com/prestodb/presto/blob/master/LICENSE
+
+### log-synth
+- Code location: https://github.com/tdunning/log-synth
+- License Type: Apache License 2.0
+- License Text: https://github.com/tdunning/log-synth/blob/master/LICENSE
+
+### Kafka 
+- Code location: https://github.com/apache/kafka
+- License Type: Apache License 2.0
+- License Text: https://github.com/apache/kafka/blob/trunk/LICENSE
+
+### Secor 
+- Code location: https://github.com/pinterest/secor
+- License Type: Apache License 2.0
+- License Text: https://github.com/pinterest/secor/blob/master/LICENSE
+
+### hive-testbench
+- Code location: https://github.com/hortonworks/hive-testbench
+- License Type: N/A
+- License Text: N/A
