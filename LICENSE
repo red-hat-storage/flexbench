@@ -2,8 +2,8 @@
 
 All code usage in this repository is goverened by included is goverend by Exhibit A, Section 3.1.2 of the Statement of Work dated January 23, 2017 between Silicon Valley Data Science LLC and Red Hat, Inc.
 
-## Used Components and Licenses
-Additional open source components that may be included in this respository include the following.
+## Included Components and Licenses
+Additional open source components that may be included in this respository include the following:
 
 ### Apache Hadoop
 - Code location: https://github.com/apache/hadoop
