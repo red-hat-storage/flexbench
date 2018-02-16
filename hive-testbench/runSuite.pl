@@ -38,9 +38,9 @@ for my $query ( @queries ) {
 	my $logname = "${engine}_${format}_${scale}_${query}_${run_id}";
 
         my $cmd = {
-                'hive' => "echo 'use $db; source $query;' | hive -i ../testbench.settings 2>&1  | tee $logname.log",
-                'hive-spark' => "echo 'use $db; source $query;' | hive -i ../testbench_hive-spark.settings 2>&1  | tee $logname.log",
-                'spark' => "spark-sql --master=yarn --database $db -f $query --properties-file ../testbench_spark.settings 2>&1 1>$logname.out | tee $logname.log",
+                'hive' => "echo 'use $db; source $query;' | hive -i ../settings/testbench.settings 2>&1  | tee $logname.log",
+                'hive-spark' => "echo 'use $db; source $query;' | hive -i ../settings/testbench_hive-spark.settings 2>&1  | tee $logname.log",
+                'spark' => "spark-sql --master=yarn --database $db -f $query --properties-file ../settings/testbench_spark.settings 2>&1 1>$logname.out | tee $logname.log",
 	        'presto' => "presto --server $PRESTO_SERVER --catalog hive --schema $db --file $query 2>&1 1>$logname.out | tee $logname.log"
         };
 
