@@ -1,0 +1,9 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: false
+  vars_files:
+    - vars/ec2.yml
+  roles:
+    - { role: vpc, tags: [ 'vpc' ] }
+    - { role: ec2, tags: [ 'ec2' ] }

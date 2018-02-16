@@ -1,0 +1,6 @@
+---
+
+remote_user: 'ceph'
+
+master_group: 'master'
+core_group: 'core'

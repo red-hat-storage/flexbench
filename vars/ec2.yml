@@ -1,0 +1,38 @@
+---
+# Default user for rhel ami
+remote_user: 'ec2-user'
+
+master_group: 'tag_Group_master'
+core_group: 'tag_Group_core'
+
+# AWS Region Information
+aws_region: "us-east-1"
+aws_az: "us-east-1e"
+
+# VPC Information
+vpc_name: "big_data"
+vpc_cidr_block: "10.0.0.0/16"
+
+# Security Rules 
+my_ip: "47.149.197.198"
+security_group_name: "big_data"
+
+# Subnets
+public_subnet_1_cidr: "10.0.1.0/24"
+
+# AWS Instance Settings
+ec2_keypair: 'macbook'
+ec2_security_group: "{{ security_group_name }}"
+ec2_instance_type: "m3.large"
+ec2_image: "ami-2051294a"
+ec2_region: "{{ aws_region }}"
+ec2_az: "{{ aws_az }}"
+ec2_device_name: "/dev/xvda"
+ec2_volume_type: "gp2"
+ec2_root_volume_size: 16
+ec2_volume_delete_on_termination: "true"
+ec2_instance_details:
+    - { name: 'master', type: 'master', group: 'master' }
+    - { name: 'core1', type: 'core', group: 'core' }
+    - { name: 'core2', type: 'core', group: 'core' }
+
