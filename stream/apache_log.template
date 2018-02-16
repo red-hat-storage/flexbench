@@ -1,0 +1,1 @@
+${kafkapartition.asText()}	${ip1.asText()}.${ip2.asText()}.${ip3.asText()}.${ip4.asText()} - - [${.now?string["yyyy-MM-dd HH:mm:ss"]} -0800] "GET /item/${(1+item?number)?string.computer} HTTP/1.1" 200 ${br.asText()} ${os.asText()} "CUSTOMER=${cust.asText()}"
